@@ -3,77 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>第四關：部首找找看</title>
+    <title>第四關：雙人部首找找看</title>
     <script src="data.js"></script>
     <style>
         body { 
             font-family: "jf-open-huninn", "Microsoft JhengHei", sans-serif; 
-            background-color: #fff9c4; /* 小狐狸關卡的粉黃色系 */
+            background-color: #fff9c4; /* 小狐狸/兔兔關卡的粉黃色系 */
             margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; box-sizing: border-box; 
         }
         
-        .main-container { width: 100%; flex-grow: 1; display: flex; flex-direction: column; align-items: center; padding: 30px 4%; box-sizing: border-box; }
-        .header-area { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .main-container { width: 100%; flex-grow: 1; display: flex; flex-direction: column; align-items: center; padding: 20px 2%; box-sizing: border-box; }
         
-        h1 { color: #f57f17; font-size: clamp(32px, 4vw, 55px); margin: 0; text-shadow: 2px 2px 0px #fff59d; }
-        .header-btns { display: flex; gap: 15px; z-index: 50; }
+        .header-area { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; max-width: 1600px; }
+        h1 { color: #f57f17; font-size: clamp(28px, 3.5vw, 45px); margin: 0; text-shadow: 2px 2px 0px #fff59d; }
         
         .nav-btn { 
             background-color: #ffb74d; color: #ffffff; text-decoration: none; font-size: clamp(16px, 1.5vw, 24px); font-weight: bold; 
-            padding: 12px 25px; border-radius: 50px; box-shadow: 0 5px 0 #f57c00; transition: 0.2s; border: 3px solid #fff; display: flex; align-items: center;
+            padding: 10px 20px; border-radius: 50px; box-shadow: 0 5px 0 #f57c00; transition: 0.2s; border: 3px solid #fff;
         }
         .nav-btn:hover { transform: translateY(4px); box-shadow: 0 0 0 #f57c00; background-color: #ffa726; }
 
-        .game-board {
-            background: #ffffff; border-radius: 40px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); border: 8px solid #fff;
-            padding: 50px; width: 100%; max-width: 800px; text-align: center;
+        .hint-box {
+            display: flex; align-items: center; justify-content: center; gap: 15px; background: #fff; padding: 15px 40px; border-radius: 50px;
+            box-shadow: 0 8px 15px rgba(245, 127, 23, 0.15); border: 4px solid #ffcc80; margin-bottom: 20px;
+        }
+        .hint-text { font-size: clamp(24px, 2.5vw, 36px); color: #ef6c00; font-weight: bold; }
+
+        /* 🌟 雙人分割畫面大框架 */
+        .split-screen {
+            display: flex; width: 100%; max-width: 1600px; gap: 20px; flex-grow: 1;
         }
 
+        /* 個別選手的版面 */
+        .player-board {
+            flex: 1; border-radius: 40px; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.08); border: 8px solid #fff; position: relative;
+        }
+        
+        /* 阿白選手 (左) */
+        .p1-board { background-color: #ffebee; border-color: #ffcdd2; }
+        .p1-board .player-title { color: #d32f2f; background: #ffcdd2; }
+        .p1-board .opt-btn { border-color: #ef5350; color: #c62828; box-shadow: 0 8px 0 #ef5350; }
+        .p1-board .opt-btn:active { box-shadow: 0 0 0 #ef5350; }
+        
+        /* 土土選手 (右) */
+        .p2-board { background-color: #e3f2fd; border-color: #bbdefb; }
+        .p2-board .player-title { color: #1976d2; background: #bbdefb; }
+        .p2-board .opt-btn { border-color: #42a5f5; color: #1565c0; box-shadow: 0 8px 0 #42a5f5; }
+        .p2-board .opt-btn:active { box-shadow: 0 0 0 #42a5f5; }
+
+        .player-title {
+            font-size: clamp(24px, 2.5vw, 36px); font-weight: bold; padding: 10px 30px; border-radius: 50px; 
+            position: absolute; top: -25px; border: 4px solid #fff; z-index: 10;
+        }
+
+        /* 目標字大框框 */
         .target-word-box {
-            font-size: clamp(100px, 15vw, 150px); font-weight: bold; color: #424242; 
-            background: #fff3e0; border: 6px dashed #ffcc80; border-radius: 40px; 
-            width: 250px; height: 250px; margin: 0 auto 40px; display: flex; justify-content: center; align-items: center;
+            font-size: clamp(70px, 10vw, 120px); font-weight: bold; color: #424242; 
+            background: rgba(255,255,255,0.8); border: 6px dashed rgba(0,0,0,0.1); border-radius: 30px; 
+            width: 180px; height: 180px; margin: 30px auto; display: flex; justify-content: center; align-items: center;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05); font-family: "Microsoft JhengHei";
         }
 
-        .question-text { font-size: clamp(24px, 2.5vw, 36px); color: #f57c00; font-weight: bold; margin-bottom: 30px; }
-
-        .options-container { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+        .options-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; width: 100%; }
         
         .opt-btn {
-            background: #ffffff; border: 6px solid #4fc3f7; border-radius: 50px; font-size: clamp(50px, 6vw, 80px);
-            font-weight: bold; color: #0288d1; width: 180px; height: 180px; cursor: pointer; box-shadow: 0 10px 0 #0288d1;
-            transition: 0.1s; display: flex; justify-content: center; align-items: center; font-family: "Microsoft JhengHei";
+            background: #ffffff; border-radius: 30px; font-size: clamp(45px, 6vw, 70px);
+            font-weight: bold; width: 140px; height: 140px; cursor: pointer;
+            transition: 0.1s; display: flex; justify-content: center; align-items: center; font-family: "Microsoft JhengHei"; border-width: 6px; border-style: solid;
         }
-        .opt-btn:active { transform: translateY(10px); box-shadow: 0 0 0 #0288d1; }
+        .opt-btn:active { transform: translateY(8px); }
         
         /* 答對答錯特效 */
-        .opt-correct { background: #e8f5e9 !important; border-color: #66bb6a !important; color: #2e7d32 !important; box-shadow: 0 10px 0 #388e3c !important; }
-        .opt-wrong { background: #ffebee !important; border-color: #ef5350 !important; color: #c62828 !important; box-shadow: 0 10px 0 #c62828 !important; }
+        .opt-correct { background: #e8f5e9 !important; border-color: #66bb6a !important; color: #2e7d32 !important; box-shadow: 0 8px 0 #388e3c !important; transform: scale(1.05); pointer-events: none;}
+        .opt-wrong { background: #ffebee !important; border-color: #ef5350 !important; color: #c62828 !important; box-shadow: 0 8px 0 #c62828 !important; pointer-events: none;}
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
         .shake { animation: shake 0.4s; }
 
-        #message { font-size: clamp(28px, 3vw, 40px); color: #f57f17; font-weight: bold; margin-top: 40px; min-height: 50px;}
+        .msg { font-size: clamp(24px, 2vw, 32px); font-weight: bold; height: 40px; margin-top: 25px; text-align: center;}
+        
+        /* 底部共用控制區 */
+        .bottom-controls { width: 100%; text-align: center; margin-top: 20px; min-height: 80px;}
+        .next-btn { 
+            background-color: #66bb6a; color: white; font-size: clamp(24px, 2.5vw, 36px); font-weight: bold; 
+            padding: 15px 50px; border-radius: 50px; border: 4px solid #fff; cursor: pointer; box-shadow: 0 8px 0 #388e3c; display: none; margin: 0 auto;
+            animation: pulse 1.5s infinite;
+        }
+        .next-btn:active { transform: translateY(8px); box-shadow: none; animation: none;}
 
-        @media (max-width: 768px) { .game-board { padding: 30px 15px; } .opt-btn { width: 130px; height: 130px; } .target-word-box { width: 180px; height: 180px; font-size: 80px;} }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+        @media (max-width: 900px) {
+            .split-screen { flex-direction: column; }
+            .target-word-box { width: 120px; height: 120px; font-size: 60px; margin: 40px auto 20px;}
+            .opt-btn { width: 100px; height: 100px; font-size: 40px;}
+        }
     </style>
 </head>
 <body>
     <div class="main-container">
         <div class="header-area">
-            <h1>🦊 第四關：部首找找看 👀</h1>
+            <h1>🐰 第四關：雙人部首找找看 👀</h1>
             <div class="header-btns"><a href="index.html" class="nav-btn">🏠 回首頁</a></div>
         </div>
         
-        <div class="game-board">
-            <div class="target-word-box" id="target-word">字</div>
-            <div class="question-text" id="question-text">這個字的部首是哪一個呢？</div>
-            
-            <div class="options-container" id="options-container">
-                </div>
+        <div class="hint-box">
+            <span class="hint-text">請選出上面這個字的「部首」是哪一個！</span>
+        </div>
+        
+        <div class="split-screen">
+            <div class="player-board p1-board">
+                <div class="player-title">🐰 阿白選手</div>
+                <div class="target-word-box" id="p1-target-word">字</div>
+                <div class="options-container" id="p1-options"></div>
+                <div class="msg" id="p1-msg" style="color:#c62828;"></div>
+            </div>
 
-            <div id="message"></div>
+            <div class="player-board p2-board">
+                <div class="player-title">🐰 土土選手</div>
+                <div class="target-word-box" id="p2-target-word">字</div>
+                <div class="options-container" id="p2-options"></div>
+                <div class="msg" id="p2-msg" style="color:#1565c0;"></div>
+            </div>
+        </div>
+        
+        <div class="bottom-controls">
+            <button id="next-btn" class="next-btn" onclick="nextQuestion()">兩人都答對了！換下一題 ➡️</button>
         </div>
     </div>
 
@@ -83,35 +139,38 @@
         const levelData = allLessonsData[lessonId] ? allLessonsData[lessonId].level4 : [];
         
         let currentIdx = 0;
+        let p1Finished = false;
+        let p2Finished = false;
         let synth = window.speechSynthesis;
 
         function startGame() {
             if(!levelData || levelData.length === 0) { 
-                document.getElementById('target-word').style.display = 'none';
-                document.getElementById('options-container').innerHTML = "<h2 style='color:red'>這課沒有部首題庫喔！</h2>"; return; 
+                document.querySelector('.split-screen').innerHTML = "<h2 style='color:red; text-align:center; width:100%;'>這課沒有部首題庫喔！</h2>"; return; 
             }
             currentIdx = 0; loadQuestion();
         }
 
         function loadQuestion() {
-            document.getElementById('message').innerText = "";
+            document.getElementById('next-btn').style.display = "none";
+            p1Finished = false;
+            p2Finished = false;
+
             const q = levelData[currentIdx];
             
-            document.getElementById('target-word').innerText = q.word;
+            // 設定雙方的目標字
+            document.getElementById('p1-target-word').innerText = q.word;
+            document.getElementById('p2-target-word').innerText = q.word;
             
-            const optContainer = document.getElementById('options-container');
-            optContainer.innerHTML = '';
-            
-            // 打亂兩個選項
-            let shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+            // 清空訊息
+            document.getElementById('p1-msg').innerText = "";
+            document.getElementById('p2-msg').innerText = "";
 
-            shuffledOptions.forEach(opt => {
-                let btn = document.createElement('button');
-                btn.className = 'opt-btn';
-                btn.innerText = opt;
-                btn.onclick = () => checkAnswer(opt, btn);
-                optContainer.appendChild(btn);
-            });
+            // 獨立打亂雙方的選項 (防止偷看對方的左右位置)
+            let p1Opts = [...q.options].sort(() => Math.random() - 0.5);
+            let p2Opts = [...q.options].sort(() => Math.random() - 0.5);
+
+            renderOptions(1, p1Opts, q.radical);
+            renderOptions(2, p2Opts, q.radical);
 
             // 語音提示
             synth.cancel();
@@ -120,34 +179,63 @@
             setTimeout(() => synth.speak(utter), 300);
         }
 
-        function checkAnswer(selectedOpt, btnElement) {
-            const q = levelData[currentIdx];
+        function renderOptions(playerNum, opts, correctRadical) {
+            const container = document.getElementById(`p${playerNum}-options`);
+            container.innerHTML = '';
             
-            // 停用所有按鈕防止連點
-            document.querySelectorAll('.opt-btn').forEach(b => b.onclick = null);
+            opts.forEach(opt => {
+                let btn = document.createElement('button');
+                btn.className = 'opt-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(playerNum, opt, correctRadical, btn);
+                container.appendChild(btn);
+            });
+        }
 
-            if (selectedOpt === q.radical) {
+        function checkAnswer(playerNum, selectedOpt, correctRadical, btnElement) {
+            // 如果該玩家已經答對了，就不理會再次點擊
+            if (playerNum === 1 && p1Finished) return;
+            if (playerNum === 2 && p2Finished) return;
+
+            const msgEl = document.getElementById(`p${playerNum}-msg`);
+
+            if (selectedOpt === correctRadical) {
+                // 答對
                 btnElement.classList.add('opt-correct');
-                document.getElementById('message').innerText = "🌟 答對囉！你太棒了！";
-                document.getElementById('message').style.color = "#2e7d32";
+                msgEl.innerText = "🌟 答對囉！等你隊友！";
                 
-                synth.cancel();
-                let utter = new SpeechSynthesisUtterance("答對了");
-                utter.lang = 'zh-TW'; synth.speak(utter);
+                if (playerNum === 1) p1Finished = true;
+                if (playerNum === 2) p2Finished = true;
 
-                setTimeout(nextQuestion, 1500);
+                checkBothFinished();
             } else {
+                // 答錯
                 btnElement.classList.add('opt-wrong', 'shake');
-                document.getElementById('message').innerText = "哎呀，不是這個喔！";
-                document.getElementById('message').style.color = "#e53935";
+                msgEl.innerText = "哎呀，選錯了！";
                 
-                // 答錯後，恢復按鈕功能讓學生重選
+                // 鎖定所有按鈕 0.8 秒後恢復，讓他們可以重選
+                const allBtns = document.getElementById(`p${playerNum}-options`).querySelectorAll('.opt-btn');
+                allBtns.forEach(b => b.style.pointerEvents = 'none');
+
                 setTimeout(() => {
                     btnElement.classList.remove('opt-wrong', 'shake');
-                    document.querySelectorAll('.opt-btn').forEach(b => {
-                        b.onclick = () => checkAnswer(b.innerText, b);
-                    });
+                    msgEl.innerText = "";
+                    allBtns.forEach(b => b.style.pointerEvents = 'auto');
                 }, 800);
+            }
+        }
+
+        function checkBothFinished() {
+            if (p1Finished && p2Finished) {
+                document.getElementById('p1-msg').innerText = "🎉 過關！";
+                document.getElementById('p2-msg').innerText = "🎉 過關！";
+                
+                document.getElementById('next-btn').style.display = "inline-block";
+                
+                synth.cancel();
+                let utter = new SpeechSynthesisUtterance("答對了，兩人都過關！");
+                utter.lang = 'zh-TW'; utter.rate = 0.9;
+                synth.speak(utter);
             }
         }
 
@@ -156,10 +244,11 @@
             if (currentIdx < levelData.length) {
                 loadQuestion();
             } else {
-                document.getElementById('target-word').style.display = "none";
-                document.getElementById('question-text').style.display = "none";
-                document.getElementById('options-container').innerHTML = "";
-                document.getElementById('message').innerHTML = "🎉 恭喜你！所有的部首都找出來了！<br><br><a href='index.html' class='opt-btn opt-correct' style='font-size:30px; width:auto; height:auto; padding:15px 40px; margin: 0 auto; text-decoration:none; box-shadow: 0 6px 0 #388e3c;'>🏠 回到樂園</a>";
+                document.querySelector('.split-screen').innerHTML = "<div style='text-align:center; width:100%; padding:50px;'><h1 style='font-size:60px; color:#f57f17;'>🎉 恭喜阿白與土土！全部過關！</h1></div>";
+                let btn = document.getElementById('next-btn');
+                btn.innerText = "🏠 回到樂園";
+                btn.onclick = () => window.location.href = 'index.html';
+                btn.style.animation = "none";
             }
         }
 
