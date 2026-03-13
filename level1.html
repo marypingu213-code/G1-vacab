@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第一關：部件組裝 (一年級可愛版)</title>
+    <script src="data.js"></script>
+    <style>
+        /* 溫暖奶油底色，滿版延伸 */
+        body { 
+            font-family: "jf-open-huninn", "Microsoft JhengHei", sans-serif; 
+            background-color: #fff9e6; 
+            margin: 0; 
+            padding: 0; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+            box-sizing: border-box; 
+        }
+        
+        .main-container { 
+            width: 100%; 
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 30px 4%; 
+            box-sizing: border-box; 
+        }
+
+        .header-area { 
+            width: 100%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 20px; 
+        }
+        
+        h1 { 
+            color: #d81b60; /* 草莓粉紅 */
+            font-size: clamp(32px, 4vw, 55px); 
+            margin: 0; 
+            text-shadow: 2px 2px 0px #ffe4e1; 
+        }
+        
+        .header-btns { display: flex; gap: 15px; z-index: 50; }
+        
+        .nav-btn { 
+            background-color: #ffb74d; 
+            color: #ffffff; 
+            text-decoration: none; 
+            font-size: clamp(16px, 1.5vw, 24px); 
+            font-weight: bold; 
+            padding: 12px 25px; 
+            border-radius: 50px; 
+            box-shadow: 0 5px 0 #f57c00; 
+            transition: 0.2s; 
+            border: 3px solid #fff; 
+            display: flex; 
+            align-items: center;
+        }
+        .nav-btn:hover { transform: translateY(4px); box-shadow: 0 0 0 #f57c00; background-color: #ffa726; }
+
+        .target-hint { 
+            font-size: clamp(28px, 3vw, 40px); 
+            color: #8d6e63; 
+            background: #ffffff; 
+            padding: 15px 50px; 
+            border-radius: 50px; 
+            box-shadow: 0 8px 15px rgba(255, 182, 107, 0.2); 
+            display: inline-block; 
+            margin-bottom: 30px; 
+            border: 4px solid #ffde99; 
+            font-weight: bold;
+        }
+        #target-word { color: #e67e22; font-size: 1.3em;}
+
+        /* 超大遊戲區 */
+        .game-wrapper { 
+            display: flex; 
+            justify-content: center; 
+            align-items: stretch; 
+            flex-wrap: wrap; 
+            gap: 4vw; 
+            width: 100%; 
+            max-width: 1400px;
+            flex-grow: 1; 
+        }
+        
+        /* 胖胖圓圓的拼圖框 */
+        .box { 
+            flex: 1;
+            min-width: 320px;
+            max-width: 550px; 
+            min-height: 450px; 
+            background: #ffffff; 
+            border-radius: 40px; 
+            position: relative; 
+            box-shadow: 0 15px 25px rgba(0,0,0,0.05); 
+        }
+        
+        .parts-pool { border: 6px dashed #ffb6c1; background-color: #fff0f5;} /* 草莓牛奶色 */
+        .drop-zone { border: 6px solid #90caf9; background-color: #f3f9ff;} /* 藍天白雲色 */
+        
+        .box-title { 
+            width: 80%; 
+            padding: 12px 0; 
+            text-align: center; 
+            font-size: clamp(22px, 2vw, 28px); 
+            font-weight: bold; 
+            position: absolute; 
+            top: -20px; 
+            left: 10%; 
+            z-index: 5; 
+            pointer-events: none; 
+            border-radius: 30px;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .pool-title { background: #ff8a80; color: #ffffff; } 
+        .zone-title { background: #4fc3f7; color: #ffffff; }
+        
+        #pool { 
+            display: flex; 
+            flex-wrap: wrap; 
+            align-content: flex-start; 
+            justify-content: center; 
+            padding-top: 60px; 
+            height: 100%; 
+            box-sizing: border-box; 
+            gap: 20px; 
+        }
+        
+        /* 部件放大，更好抓 */
+        .part-img { 
+            width: 180px; 
+            height: 180px; 
+            object-fit: contain; 
+            cursor: grab; 
+            transition: transform 0.1s ease; 
+            z-index: 10; 
+            touch-action: none; 
+        }
+        #pool .part-img { 
+            position: relative !important; 
+            left: auto !important; 
+            top: auto !important; 
+            margin: 10px; 
+            background-color: #ffffff; 
+            border: 4px solid #ffe082; 
+            border-radius: 20px; 
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+        }
+        .part-img:active { cursor: grabbing; transform: scale(1.15) rotate(5deg); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+        
+        #zone-guide { 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            font-size: clamp(28px, 3vw, 40px); 
+            color: #b0bec5; 
+            font-weight: bold; 
+            pointer-events: none; 
+            width: 80%; 
+            text-align: center; 
+        }
+        
+        .status-area { 
+            min-height: 100px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 3vw; 
+            margin-top: 30px; 
+            width: 100%; 
+        }
+        
+        #message { 
+            font-size: clamp(30px, 3vw, 45px); 
+            color: #ff9800; 
+            font-weight: bold; 
+            margin: 0; 
+        }
+        
+        #next-btn { 
+            font-size: clamp(24px, 2vw, 36px); 
+            padding: 15px 40px; 
+            background-color: #66bb6a; 
+            color: white; 
+            border: 4px solid #ffffff; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            display: none; 
+            box-shadow: 0 8px 0 #388e3c; 
+            font-weight: bold; 
+            transition: 0.1s;
+        }
+        #next-btn:active { transform: translateY(8px); box-shadow: 0 0 0 #388e3c; }
+
+        @media (max-width: 768px) {
+            .header-area { flex-direction: column; gap: 15px; }
+            .box { min-height: 350px; } 
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="header-area">
+            <h1>🐰 第一關：部件組裝 🧩</h1>
+            <div class="header-btns">
+                <a href="index.html" class="nav-btn">🏠 回首頁</a>
+            </div>
+        </div>
+        
+        <div class="target-hint">要拼的字是 👉 <span id="target-word">字</span></div>
+        
+        <div class="game-wrapper">
+            <div class="box parts-pool" id="pool">
+                <div class="box-title pool-title">1️⃣ 點住積木拖過去</div>
+            </div>
+            <div class="box drop-zone" id="zone">
+                <div class="box-title zone-title">2️⃣ 在這裡拼起來</div>
+                <p id="zone-guide">把積木放進來喔！</p>
+            </div>
+        </div>
+        <div class="status-area">
+            <div id="message"></div>
+            <button id="next-btn" onclick="nextWord()">拼好了！換下一題 ➡️</button>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const lessonId = urlParams.get('id') || "3"; // 預設抓第三課
+        
+        const wordData = allLessonsData[lessonId] ? allLessonsData[lessonId].level1 : [];
+
+        let gameWords = [], currentIdx = 0, placedCount = 0;
+        let activePart = null, offsetX = 0, offsetY = 0;
+        
+        const BASE_PART_SIZE = 180; 
+
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex); currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            } return array;
+        }
+
+        function startGame() { 
+            if(wordData.length === 0) { alert("找不到這一課的生字喔！請老師檢查 data.js"); return; }
+            gameWords = shuffle([...wordData]); currentIdx = 0; initGame(); 
+        }
+
+        function initGame() {
+            const pool = document.getElementById('pool'), targetWord = document.getElementById('target-word'), msg = document.getElementById('message'), guide = document.getElementById('zone-guide'), nextBtn = document.getElementById('next-btn');
+            document.querySelectorAll('.part-img').forEach(img => img.remove());
+            msg.innerText = ''; nextBtn.style.display = 'none'; nextBtn.innerText = '拼好了！換下一題 ➡️'; nextBtn.onclick = nextWord;
+            placedCount = 0; guide.style.display = 'block';
+            let data = gameWords[currentIdx]; targetWord.innerText = data.word;
+            let shuffledParts = [...data.parts].sort(() => Math.random() - 0.5);
+            
+            shuffledParts.forEach((src) => {
+                let img = document.createElement('img'); img.src = src; img.className = 'part-img'; 
+                img.draggable = false;
+                
+                let partIdx = data.parts.indexOf(src);
+                if (data.pos[partIdx] && data.pos[partIdx].scale) {
+                    let newSize = BASE_PART_SIZE * data.pos[partIdx].scale;
+                    img.style.width = newSize + 'px';
+                    img.style.height = newSize + 'px';
+                }
+
+                img.addEventListener('pointerdown', handlePointerDown);
+                img.onerror = function() { console.error("圖片遺失: " + src); }; 
+                pool.appendChild(img);
+            });
+        }
+
+        function handlePointerDown(e) {
+            e.preventDefault();
+            activePart = this;
+            activePart.style.zIndex = 1000;
+            activePart.setPointerCapture(e.pointerId);
+
+            let rect = activePart.getBoundingClientRect();
+            
+            if (activePart.parentElement.id === 'pool') {
+                offsetX = e.clientX - rect.left;
+                offsetY = e.clientY - rect.top;
+                activePart.style.position = 'fixed';
+                activePart.style.left = rect.left + 'px';
+                activePart.style.top = rect.top + 'px';
+                document.body.appendChild(activePart);
+            } else if (activePart.parentElement.id === 'zone') {
+                offsetX = e.clientX - rect.left;
+                offsetY = e.clientY - rect.top;
+            }
+
+            activePart.addEventListener('pointermove', handlePointerMove);
+            activePart.addEventListener('pointerup', handlePointerUp);
+        }
+
+        function handlePointerMove(e) {
+            if (!activePart) return;
+            e.preventDefault();
+            
+            if (activePart.parentElement === document.body) {
+                activePart.style.left = (e.clientX - offsetX) + 'px';
+                activePart.style.top = (e.clientY - offsetY) + 'px';
+            } else if (activePart.parentElement.id === 'zone') {
+                let zoneRect = document.getElementById('zone').getBoundingClientRect();
+                let newLeft = e.clientX - zoneRect.left - offsetX;
+                let newTop = e.clientY - zoneRect.top - offsetY;
+                activePart.style.left = newLeft + 'px';
+                activePart.style.top = newTop + 'px';
+            }
+        }
+
+        function handlePointerUp(e) {
+            if (!activePart) return;
+            activePart.releasePointerCapture(e.pointerId);
+            activePart.removeEventListener('pointermove', handlePointerMove);
+            activePart.removeEventListener('pointerup', handlePointerUp);
+            activePart.style.zIndex = 10;
+
+            let zone = document.getElementById('zone');
+            let zoneRect = zone.getBoundingClientRect();
+            let pool = document.getElementById('pool');
+
+            let droppedInZone = ( e.clientX >= zoneRect.left && e.clientX <= zoneRect.right && e.clientY >= zoneRect.top && e.clientY <= zoneRect.bottom );
+
+            if (droppedInZone) {
+                if (activePart.parentElement === document.body) {
+                    zone.appendChild(activePart);
+                    document.getElementById('zone-guide').style.display = 'none';
+                    placedCount++;
+                }
+                activePart.style.position = 'absolute';
+                let newLeft = e.clientX - zoneRect.left - offsetX;
+                let newTop = e.clientY - zoneRect.top - offsetY;
+                activePart.style.left = newLeft + 'px';
+                activePart.style.top = newTop + 'px';
+                
+                checkWin();
+            } else {
+                if (activePart.parentElement === zone) placedCount--;
+                pool.appendChild(activePart);
+                activePart.style.position = 'relative';
+                activePart.style.left = 'auto';
+                activePart.style.top = 'auto';
+                
+                if (placedCount < gameWords[currentIdx].parts.length) { 
+                    document.getElementById('message').innerText = ''; 
+                    document.getElementById('next-btn').style.display = 'none'; 
+                }
+                if (document.querySelectorAll('#zone .part-img').length === 0) {
+                    document.getElementById('zone-guide').style.display = 'block';
+                }
+            }
+            activePart = null;
+        }
+        
+        function checkWin() { 
+            if (placedCount === gameWords[currentIdx].parts.length) { 
+                document.getElementById('message').innerText = "🌟 檢查看看拼得對不對喔！ 🌟"; 
+                document.getElementById('next-btn').style.display = 'inline-block'; 
+            } 
+        }
+        
+        function nextWord() { 
+            currentIdx++; 
+            if (currentIdx < gameWords.length) { 
+                initGame(); 
+            } else { 
+                document.getElementById('message').style.color = "#d81b60";
+                document.getElementById('message').innerText = "🎉 哇！你全部都拼對了！超棒！"; 
+                let btn = document.getElementById('next-btn');
+                btn.innerText = '🏠 回到樂園大廳';
+                btn.onclick = () => { window.location.href = `index.html`; };
+            } 
+        }
+        
+        window.onload = startGame;
+    </script>
+</body>
+</html>
