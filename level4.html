@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第四關：部首找找看</title>
+    <script src="data.js"></script>
+    <style>
+        body { 
+            font-family: "jf-open-huninn", "Microsoft JhengHei", sans-serif; 
+            background-color: #fff9c4; /* 小狐狸關卡的粉黃色系 */
+            margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; box-sizing: border-box; 
+        }
+        
+        .main-container { width: 100%; flex-grow: 1; display: flex; flex-direction: column; align-items: center; padding: 30px 4%; box-sizing: border-box; }
+        .header-area { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        
+        h1 { color: #f57f17; font-size: clamp(32px, 4vw, 55px); margin: 0; text-shadow: 2px 2px 0px #fff59d; }
+        .header-btns { display: flex; gap: 15px; z-index: 50; }
+        
+        .nav-btn { 
+            background-color: #ffb74d; color: #ffffff; text-decoration: none; font-size: clamp(16px, 1.5vw, 24px); font-weight: bold; 
+            padding: 12px 25px; border-radius: 50px; box-shadow: 0 5px 0 #f57c00; transition: 0.2s; border: 3px solid #fff; display: flex; align-items: center;
+        }
+        .nav-btn:hover { transform: translateY(4px); box-shadow: 0 0 0 #f57c00; background-color: #ffa726; }
+
+        .game-board {
+            background: #ffffff; border-radius: 40px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); border: 8px solid #fff;
+            padding: 50px; width: 100%; max-width: 800px; text-align: center;
+        }
+
+        .target-word-box {
+            font-size: clamp(100px, 15vw, 150px); font-weight: bold; color: #424242; 
+            background: #fff3e0; border: 6px dashed #ffcc80; border-radius: 40px; 
+            width: 250px; height: 250px; margin: 0 auto 40px; display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); font-family: "Microsoft JhengHei";
+        }
+
+        .question-text { font-size: clamp(24px, 2.5vw, 36px); color: #f57c00; font-weight: bold; margin-bottom: 30px; }
+
+        .options-container { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+        
+        .opt-btn {
+            background: #ffffff; border: 6px solid #4fc3f7; border-radius: 50px; font-size: clamp(50px, 6vw, 80px);
+            font-weight: bold; color: #0288d1; width: 180px; height: 180px; cursor: pointer; box-shadow: 0 10px 0 #0288d1;
+            transition: 0.1s; display: flex; justify-content: center; align-items: center; font-family: "Microsoft JhengHei";
+        }
+        .opt-btn:active { transform: translateY(10px); box-shadow: 0 0 0 #0288d1; }
+        
+        /* 答對答錯特效 */
+        .opt-correct { background: #e8f5e9 !important; border-color: #66bb6a !important; color: #2e7d32 !important; box-shadow: 0 10px 0 #388e3c !important; }
+        .opt-wrong { background: #ffebee !important; border-color: #ef5350 !important; color: #c62828 !important; box-shadow: 0 10px 0 #c62828 !important; }
+
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
+        .shake { animation: shake 0.4s; }
+
+        #message { font-size: clamp(28px, 3vw, 40px); color: #f57f17; font-weight: bold; margin-top: 40px; min-height: 50px;}
+
+        @media (max-width: 768px) { .game-board { padding: 30px 15px; } .opt-btn { width: 130px; height: 130px; } .target-word-box { width: 180px; height: 180px; font-size: 80px;} }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="header-area">
+            <h1>🦊 第四關：部首找找看 👀</h1>
+            <div class="header-btns"><a href="index.html" class="nav-btn">🏠 回首頁</a></div>
+        </div>
+        
+        <div class="game-board">
+            <div class="target-word-box" id="target-word">字</div>
+            <div class="question-text" id="question-text">這個字的部首是哪一個呢？</div>
+            
+            <div class="options-container" id="options-container">
+                </div>
+
+            <div id="message"></div>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const lessonId = urlParams.get('id') || "3"; 
+        const levelData = allLessonsData[lessonId] ? allLessonsData[lessonId].level4 : [];
+        
+        let currentIdx = 0;
+        let synth = window.speechSynthesis;
+
+        function startGame() {
+            if(!levelData || levelData.length === 0) { 
+                document.getElementById('target-word').style.display = 'none';
+                document.getElementById('options-container').innerHTML = "<h2 style='color:red'>這課沒有部首題庫喔！</h2>"; return; 
+            }
+            currentIdx = 0; loadQuestion();
+        }
+
+        function loadQuestion() {
+            document.getElementById('message').innerText = "";
+            const q = levelData[currentIdx];
+            
+            document.getElementById('target-word').innerText = q.word;
+            
+            const optContainer = document.getElementById('options-container');
+            optContainer.innerHTML = '';
+            
+            // 打亂兩個選項
+            let shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+
+            shuffledOptions.forEach(opt => {
+                let btn = document.createElement('button');
+                btn.className = 'opt-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt, btn);
+                optContainer.appendChild(btn);
+            });
+
+            // 語音提示
+            synth.cancel();
+            let utter = new SpeechSynthesisUtterance(`「${q.word}」的部首是哪一個呢？`);
+            utter.lang = 'zh-TW'; utter.rate = 0.85;
+            setTimeout(() => synth.speak(utter), 300);
+        }
+
+        function checkAnswer(selectedOpt, btnElement) {
+            const q = levelData[currentIdx];
+            
+            // 停用所有按鈕防止連點
+            document.querySelectorAll('.opt-btn').forEach(b => b.onclick = null);
+
+            if (selectedOpt === q.radical) {
+                btnElement.classList.add('opt-correct');
+                document.getElementById('message').innerText = "🌟 答對囉！你太棒了！";
+                document.getElementById('message').style.color = "#2e7d32";
+                
+                synth.cancel();
+                let utter = new SpeechSynthesisUtterance("答對了");
+                utter.lang = 'zh-TW'; synth.speak(utter);
+
+                setTimeout(nextQuestion, 1500);
+            } else {
+                btnElement.classList.add('opt-wrong', 'shake');
+                document.getElementById('message').innerText = "哎呀，不是這個喔！";
+                document.getElementById('message').style.color = "#e53935";
+                
+                // 答錯後，恢復按鈕功能讓學生重選
+                setTimeout(() => {
+                    btnElement.classList.remove('opt-wrong', 'shake');
+                    document.querySelectorAll('.opt-btn').forEach(b => {
+                        b.onclick = () => checkAnswer(b.innerText, b);
+                    });
+                }, 800);
+            }
+        }
+
+        function nextQuestion() {
+            currentIdx++;
+            if (currentIdx < levelData.length) {
+                loadQuestion();
+            } else {
+                document.getElementById('target-word').style.display = "none";
+                document.getElementById('question-text').style.display = "none";
+                document.getElementById('options-container').innerHTML = "";
+                document.getElementById('message').innerHTML = "🎉 恭喜你！所有的部首都找出來了！<br><br><a href='index.html' class='opt-btn opt-correct' style='font-size:30px; width:auto; height:auto; padding:15px 40px; margin: 0 auto; text-decoration:none; box-shadow: 0 6px 0 #388e3c;'>🏠 回到樂園</a>";
+            }
+        }
+
+        window.onload = startGame;
+    </script>
+</body>
+</html>
