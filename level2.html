@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第二關：找找錯別字</title>
+    <script src="data.js"></script>
+    <style>
+        body { 
+            font-family: "jf-open-huninn", "Microsoft JhengHei", sans-serif; 
+            background-color: #e3f2fd; /* 貓頭鷹關卡的粉藍色系 */
+            margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; box-sizing: border-box; 
+        }
+        
+        .main-container { width: 100%; flex-grow: 1; display: flex; flex-direction: column; align-items: center; padding: 30px 4%; box-sizing: border-box; }
+        .header-area { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        
+        h1 { color: #1976d2; font-size: clamp(32px, 4vw, 55px); margin: 0; text-shadow: 2px 2px 0px #bbdefb; }
+        .header-btns { display: flex; gap: 15px; z-index: 50; }
+        
+        .nav-btn { 
+            background-color: #ffb74d; color: #ffffff; text-decoration: none; font-size: clamp(16px, 1.5vw, 24px); font-weight: bold; 
+            padding: 12px 25px; border-radius: 50px; box-shadow: 0 5px 0 #f57c00; transition: 0.2s; border: 3px solid #fff; display: flex; align-items: center;
+        }
+        .nav-btn:hover { transform: translateY(4px); box-shadow: 0 0 0 #f57c00; background-color: #ffa726; }
+
+        /* 語音與提示區 */
+        .hint-box {
+            display: flex; align-items: center; gap: 15px; background: #fff; padding: 15px 40px; border-radius: 50px;
+            box-shadow: 0 8px 15px rgba(25, 118, 210, 0.15); border: 4px solid #90caf9; margin-bottom: 40px; cursor: pointer; transition: 0.2s;
+        }
+        .hint-box:hover { transform: scale(1.05); }
+        .hint-icon { font-size: 40px; }
+        .hint-text { font-size: clamp(24px, 2.5vw, 36px); color: #1565c0; font-weight: bold; }
+
+        /* 遊戲主要區域 */
+        .game-board {
+            background: #ffffff; border-radius: 40px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); border: 8px solid #fff;
+            padding: 50px; width: 100%; max-width: 1200px; text-align: center; position: relative;
+        }
+
+        /* 步驟一：選錯字 */
+        .sentence-container {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px;
+        }
+        
+        .char-btn {
+            font-size: clamp(36px, 4vw, 60px); font-weight: bold; color: #37474f; background: #f5f5f5; 
+            border: 3px solid #e0e0e0; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: 0.2s;
+            font-family: "Microsoft JhengHei";
+        }
+        .char-btn:hover { background: #e3f2fd; border-color: #64b5f6; transform: translateY(-5px); }
+        .char-btn.is-punctuation { background: transparent; border: none; cursor: default; box-shadow: none; padding: 15px 5px;}
+        .char-btn.is-punctuation:hover { transform: none; }
+        
+        /* 錯誤震動特效 */
+        @keyframes shake {
+            0% { transform: translateX(0); } 25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); } 75% { transform: translateX(-10px); } 100% { transform: translateX(0); }
+        }
+        .shake { animation: shake 0.4s; background: #ffebee !important; border-color: #ef9a9a !important; color: #c62828; }
+
+        /* 步驟二：選正確字 (雲朵按鈕) */
+        #options-area { display: none; margin-top: 50px; }
+        .options-title { font-size: 28px; color: #f57c00; font-weight: bold; margin-bottom: 20px; }
+        .options-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        
+        .cloud-btn {
+            background: #ffffff; border: 4px solid #81c784; border-radius: 50px; font-size: clamp(40px, 5vw, 70px);
+            font-weight: bold; color: #2e7d32; padding: 20px 50px; cursor: pointer; box-shadow: 0 10px 0 #66bb6a;
+            transition: 0.2s; position: relative;
+        }
+        .cloud-btn::before, .cloud-btn::after {
+            content: ''; position: absolute; background: #ffffff; border: 4px solid #81c784; border-bottom: none; border-right: none;
+            border-radius: 50%; z-index: -1;
+        }
+        .cloud-btn:active { transform: translateY(10px); box-shadow: 0 0 0 #66bb6a; }
+
+        /* 替換成功特效 */
+        .fixed-char { background: #e8f5e9 !important; border-color: #81c784 !important; color: #2e7d32 !important; transform: scale(1.1); box-shadow: 0 0 20px rgba(129, 199, 132, 0.5); }
+
+        #message { font-size: clamp(30px, 3vw, 45px); color: #ff9800; font-weight: bold; margin-top: 40px; height: 50px;}
+
+        @media (max-width: 768px) {
+            .game-board { padding: 30px 15px; } .char-btn { padding: 10px 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="header-area">
+            <h1>🦉 第二關：找找錯別字 🔍</h1>
+            <div class="header-btns"><a href="index.html" class="nav-btn">🏠 回首頁</a></div>
+        </div>
+        
+        <div class="hint-box" onclick="playAudioHint()">
+            <span class="hint-icon">🔊</span>
+            <span class="hint-text">點我聽聽看，哪裡怪怪的？</span>
+        </div>
+        
+        <div class="game-board">
+            <div id="sentence-area" class="sentence-container"></div>
+            
+            <div id="options-area">
+                <div class="options-title">👉 請選出正確的字：</div>
+                <div id="options-container" class="options-container"></div>
+            </div>
+
+            <div id="message"></div>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const lessonId = urlParams.get('id') || "3"; 
+        
+        const levelData = allLessonsData[lessonId] ? allLessonsData[lessonId].level2 : [];
+        
+        let currentIdx = 0;
+        let isPhaseTwo = false; // Phase 1: 找錯字, Phase 2: 選正確字
+        let synth = window.speechSynthesis;
+
+        function startGame() {
+            if(!levelData || levelData.length === 0) { 
+                document.getElementById('sentence-area').innerHTML = "<h2 style='color:red'>這課沒有找錯字題庫喔！</h2>";
+                return; 
+            }
+            currentIdx = 0;
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            isPhaseTwo = false;
+            document.getElementById('options-area').style.display = 'none';
+            document.getElementById('message').innerText = "";
+            
+            const q = levelData[currentIdx];
+            const sentenceContainer = document.getElementById('sentence-area');
+            sentenceContainer.innerHTML = '';
+
+            // 將句子拆成一個一個字產生按鈕
+            for (let i = 0; i < q.text.length; i++) {
+                let char = q.text[i];
+                let btn = document.createElement('button');
+                btn.innerText = char;
+                
+                // 如果是標點符號，就不加上按鈕樣式
+                if ("，。、！？；".includes(char)) {
+                    btn.className = "char-btn is-punctuation";
+                } else {
+                    btn.className = "char-btn";
+                    btn.onclick = () => checkTypo(char, btn);
+                }
+                
+                btn.id = "char-" + i;
+                sentenceContainer.appendChild(btn);
+            }
+
+            // 自動朗讀
+            setTimeout(playAudioHint, 500);
+        }
+
+        function playAudioHint() {
+            const q = levelData[currentIdx];
+            synth.cancel();
+            const utter = new SpeechSynthesisUtterance(q.speakText);
+            utter.lang = 'zh-TW';
+            utter.rate = 0.85; // 語速慢一點
+            synth.speak(utter);
+        }
+
+        // 步驟一：檢查點擊的字是不是錯字
+        function checkTypo(clickedChar, btnElement) {
+            if (isPhaseTwo) return; // 如果已經進入選字階段，就不理會點擊
+
+            const q = levelData[currentIdx];
+            if (clickedChar === q.typo) {
+                // 答對了！進入第二階段
+                isPhaseTwo = true;
+                synth.cancel(); // 停止語音
+                
+                // 把錯字變成空格
+                btnElement.innerText = "？";
+                btnElement.style.backgroundColor = "#ffe082";
+                btnElement.style.borderColor = "#ffb300";
+                btnElement.style.color = "#e65100";
+                
+                showOptions();
+            } else {
+                // 點錯了，震動提示
+                btnElement.classList.add('shake');
+                setTimeout(() => btnElement.classList.remove('shake'), 400);
+                document.getElementById('message').innerText = "再找找看，這個字沒錯喔！";
+                document.getElementById('message').style.color = "#e53935";
+            }
+        }
+
+        // 步驟二：顯示三個正確/錯誤選項
+        function showOptions() {
+            document.getElementById('message').innerText = "好棒！抓到錯字了！";
+            document.getElementById('message').style.color = "#1976d2";
+
+            const q = levelData[currentIdx];
+            const optContainer = document.getElementById('options-container');
+            optContainer.innerHTML = '';
+
+            // 把選項打亂
+            let shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+
+            shuffledOptions.forEach(opt => {
+                let btn = document.createElement('button');
+                btn.className = 'cloud-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkCorrectWord(opt);
+                optContainer.appendChild(btn);
+            });
+
+            document.getElementById('options-area').style.display = 'block';
+        }
+
+        function checkCorrectWord(selectedWord) {
+            const q = levelData[currentIdx];
+            if (selectedWord === q.correct) {
+                // 答對了！
+                document.getElementById('options-area').style.display = 'none';
+                document.getElementById('message').innerText = "🌟 答對囉！太厲害了！";
+                document.getElementById('message').style.color = "#2e7d32";
+
+                // 把上方句子中的問號換成正確的字
+                const btns = document.querySelectorAll('.char-btn');
+                btns.forEach(b => {
+                    if (b.innerText === "？") {
+                        b.innerText = q.correct;
+                        b.className = "char-btn fixed-char";
+                    }
+                });
+
+                // 2秒後進入下一題
+                setTimeout(nextQuestion, 2000);
+            } else {
+                document.getElementById('message').innerText = "哎呀，選錯字囉！再試一次！";
+                document.getElementById('message').style.color = "#e53935";
+            }
+        }
+
+        function nextQuestion() {
+            currentIdx++;
+            if (currentIdx < levelData.length) {
+                loadQuestion();
+            } else {
+                document.getElementById('sentence-area').innerHTML = "";
+                document.getElementById('options-area').style.display = 'none';
+                document.getElementById('message').innerHTML = "🎉 恭喜你！全部的錯字都被你抓出來了！<br><br><a href='index.html' class='cloud-btn' style='font-size:30px; padding:15px 30px; text-decoration:none;'>🏠 回到樂園</a>";
+            }
+        }
+
+        window.onload = startGame;
+    </script>
+</body>
+</html>
