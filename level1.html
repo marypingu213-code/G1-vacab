@@ -6,202 +6,86 @@
     <title>第一關：部件組裝 (一年級可愛版)</title>
     <script src="data.js"></script>
     <style>
-        /* 溫暖奶油底色，滿版延伸 */
         body { 
             font-family: "jf-open-huninn", "Microsoft JhengHei", sans-serif; 
             background-color: #fff9e6; 
-            margin: 0; 
-            padding: 0; 
-            display: flex; 
-            flex-direction: column; 
-            min-height: 100vh; 
-            box-sizing: border-box; 
+            margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; box-sizing: border-box; 
         }
         
-        .main-container { 
-            width: 100%; 
-            flex-grow: 1; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            padding: 30px 4%; 
-            box-sizing: border-box; 
-        }
-
-        .header-area { 
-            width: 100%; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            margin-bottom: 20px; 
-        }
+        .main-container { width: 100%; flex-grow: 1; display: flex; flex-direction: column; align-items: center; padding: 30px 4%; box-sizing: border-box; }
+        .header-area { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         
-        h1 { 
-            color: #d81b60; /* 草莓粉紅 */
-            font-size: clamp(32px, 4vw, 55px); 
-            margin: 0; 
-            text-shadow: 2px 2px 0px #ffe4e1; 
-        }
-        
+        h1 { color: #d81b60; font-size: clamp(32px, 4vw, 55px); margin: 0; text-shadow: 2px 2px 0px #ffe4e1; }
         .header-btns { display: flex; gap: 15px; z-index: 50; }
         
         .nav-btn { 
-            background-color: #ffb74d; 
-            color: #ffffff; 
-            text-decoration: none; 
-            font-size: clamp(16px, 1.5vw, 24px); 
-            font-weight: bold; 
-            padding: 12px 25px; 
-            border-radius: 50px; 
-            box-shadow: 0 5px 0 #f57c00; 
-            transition: 0.2s; 
-            border: 3px solid #fff; 
-            display: flex; 
-            align-items: center;
+            background-color: #ffb74d; color: #ffffff; text-decoration: none; font-size: clamp(16px, 1.5vw, 24px); font-weight: bold; 
+            padding: 12px 25px; border-radius: 50px; box-shadow: 0 5px 0 #f57c00; transition: 0.2s; border: 3px solid #fff; display: flex; align-items: center;
         }
         .nav-btn:hover { transform: translateY(4px); box-shadow: 0 0 0 #f57c00; background-color: #ffa726; }
 
         .target-hint { 
-            font-size: clamp(28px, 3vw, 40px); 
-            color: #8d6e63; 
-            background: #ffffff; 
-            padding: 15px 50px; 
-            border-radius: 50px; 
-            box-shadow: 0 8px 15px rgba(255, 182, 107, 0.2); 
-            display: inline-block; 
-            margin-bottom: 30px; 
-            border: 4px solid #ffde99; 
-            font-weight: bold;
+            font-size: clamp(28px, 3vw, 40px); color: #8d6e63; background: #ffffff; padding: 15px 50px; border-radius: 50px; 
+            box-shadow: 0 8px 15px rgba(255, 182, 107, 0.2); display: inline-block; margin-bottom: 30px; border: 4px solid #ffde99; font-weight: bold;
         }
         #target-word { color: #e67e22; font-size: 1.3em;}
 
-        /* 超大遊戲區 */
-        .game-wrapper { 
-            display: flex; 
-            justify-content: center; 
-            align-items: stretch; 
-            flex-wrap: wrap; 
-            gap: 4vw; 
-            width: 100%; 
-            max-width: 1400px;
-            flex-grow: 1; 
-        }
+        .game-wrapper { display: flex; justify-content: center; align-items: stretch; flex-wrap: wrap; gap: 4vw; width: 100%; max-width: 1400px; flex-grow: 1; transition: 0.3s;}
         
-        /* 胖胖圓圓的拼圖框 */
-        .box { 
-            flex: 1;
-            min-width: 320px;
-            max-width: 550px; 
-            min-height: 450px; 
-            background: #ffffff; 
-            border-radius: 40px; 
-            position: relative; 
-            box-shadow: 0 15px 25px rgba(0,0,0,0.05); 
-        }
-        
-        .parts-pool { border: 6px dashed #ffb6c1; background-color: #fff0f5;} /* 草莓牛奶色 */
-        .drop-zone { border: 6px solid #90caf9; background-color: #f3f9ff;} /* 藍天白雲色 */
+        .box { flex: 1; min-width: 320px; max-width: 550px; min-height: 450px; background: #ffffff; border-radius: 40px; position: relative; box-shadow: 0 15px 25px rgba(0,0,0,0.05); }
+        .parts-pool { border: 6px dashed #ffb6c1; background-color: #fff0f5;} 
+        .drop-zone { border: 6px solid #90caf9; background-color: #f3f9ff;} 
         
         .box-title { 
-            width: 80%; 
-            padding: 12px 0; 
-            text-align: center; 
-            font-size: clamp(22px, 2vw, 28px); 
-            font-weight: bold; 
-            position: absolute; 
-            top: -20px; 
-            left: 10%; 
-            z-index: 5; 
-            pointer-events: none; 
-            border-radius: 30px;
-            border: 3px solid #fff;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 80%; padding: 12px 0; text-align: center; font-size: clamp(22px, 2vw, 28px); font-weight: bold; 
+            position: absolute; top: -20px; left: 10%; z-index: 5; pointer-events: none; border-radius: 30px; border: 3px solid #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         .pool-title { background: #ff8a80; color: #ffffff; } 
         .zone-title { background: #4fc3f7; color: #ffffff; }
         
-        #pool { 
-            display: flex; 
-            flex-wrap: wrap; 
-            align-content: flex-start; 
-            justify-content: center; 
-            padding-top: 60px; 
-            height: 100%; 
-            box-sizing: border-box; 
-            gap: 20px; 
-        }
+        #pool { display: flex; flex-wrap: wrap; align-content: flex-start; justify-content: center; padding-top: 60px; height: 100%; box-sizing: border-box; gap: 20px; }
         
-        /* 部件放大，更好抓 */
-        .part-img { 
-            width: 180px; 
-            height: 180px; 
-            object-fit: contain; 
-            cursor: grab; 
-            transition: transform 0.1s ease; 
-            z-index: 10; 
-            touch-action: none; 
-        }
-        #pool .part-img { 
-            position: relative !important; 
-            left: auto !important; 
-            top: auto !important; 
-            margin: 10px; 
-            background-color: #ffffff; 
-            border: 4px solid #ffe082; 
-            border-radius: 20px; 
-            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
-        }
+        .part-img { width: 180px; height: 180px; object-fit: contain; cursor: grab; transition: transform 0.1s ease; z-index: 10; touch-action: none; }
+        #pool .part-img { position: relative !important; left: auto !important; top: auto !important; margin: 10px; background-color: #ffffff; border: 4px solid #ffe082; border-radius: 20px; box-shadow: 0 6px 12px rgba(0,0,0,0.08); }
         .part-img:active { cursor: grabbing; transform: scale(1.15) rotate(5deg); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
         
-        #zone-guide { 
-            position: absolute; 
-            top: 50%; 
-            left: 50%; 
-            transform: translate(-50%, -50%); 
-            font-size: clamp(28px, 3vw, 40px); 
-            color: #b0bec5; 
-            font-weight: bold; 
-            pointer-events: none; 
-            width: 80%; 
-            text-align: center; 
-        }
+        #zone-guide { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: clamp(28px, 3vw, 40px); color: #b0bec5; font-weight: bold; pointer-events: none; width: 80%; text-align: center; }
         
-        .status-area { 
-            min-height: 100px; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            gap: 3vw; 
-            margin-top: 30px; 
-            width: 100%; 
-        }
-        
-        #message { 
-            font-size: clamp(30px, 3vw, 45px); 
-            color: #ff9800; 
-            font-weight: bold; 
-            margin: 0; 
-        }
+        .status-area { min-height: 100px; display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 20px; margin-top: 30px; width: 100%; }
+        #message { font-size: clamp(30px, 3vw, 45px); color: #ff9800; font-weight: bold; margin: 0; text-align: center;}
         
         #next-btn { 
-            font-size: clamp(24px, 2vw, 36px); 
-            padding: 15px 40px; 
-            background-color: #66bb6a; 
-            color: white; 
-            border: 4px solid #ffffff; 
-            border-radius: 50px; 
-            cursor: pointer; 
-            display: none; 
-            box-shadow: 0 8px 0 #388e3c; 
-            font-weight: bold; 
-            transition: 0.1s;
+            font-size: clamp(24px, 2vw, 36px); padding: 15px 40px; background-color: #66bb6a; color: white; border: 4px solid #ffffff; 
+            border-radius: 50px; cursor: pointer; display: none; box-shadow: 0 8px 0 #388e3c; font-weight: bold; transition: 0.1s;
         }
         #next-btn:active { transform: translateY(8px); box-shadow: 0 0 0 #388e3c; }
 
-        @media (max-width: 768px) {
-            .header-area { flex-direction: column; gap: 15px; }
-            .box { min-height: 350px; } 
+        /* 🌟 語詞學習彈出卡片 (驚喜特效) */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);
+            display: none; justify-content: center; align-items: center; z-index: 1000; opacity: 0; transition: opacity 0.3s;
         }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        
+        .modal-card {
+            background: #ffffff; border: 8px solid #ffe082; border-radius: 40px; padding: 40px 60px; text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4); transform: scale(0.5); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); max-width: 90vw;
+        }
+        .modal-overlay.active .modal-card { transform: scale(1); }
+        
+        .modal-word { font-size: clamp(60px, 8vw, 100px); color: #d81b60; margin: 0 0 20px 0; font-weight: bold; letter-spacing: 5px; text-shadow: 3px 3px 0 #ffe4e1;}
+        .modal-img { 
+            width: 250px; height: 250px; object-fit: contain; border: 6px dashed #90caf9; border-radius: 30px; 
+            margin: 0 auto 30px auto; background-color: #f3f9ff; padding: 15px; display: block;
+        }
+        
+        .modal-btns { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .btn-audio { background-color: #4fc3f7; color: white; font-size: clamp(20px, 2vw, 28px); font-weight: bold; padding: 15px 30px; border-radius: 50px; border: 4px solid #fff; cursor: pointer; box-shadow: 0 6px 0 #0288d1; transition: 0.2s; }
+        .btn-audio:active { transform: translateY(6px); box-shadow: none; }
+        .btn-next-card { background-color: #66bb6a; color: white; font-size: clamp(20px, 2vw, 28px); font-weight: bold; padding: 15px 30px; border-radius: 50px; border: 4px solid #fff; cursor: pointer; box-shadow: 0 6px 0 #388e3c; transition: 0.2s; }
+        .btn-next-card:active { transform: translateY(6px); box-shadow: none; }
+
+        @media (max-width: 768px) { .header-area { flex-direction: column; gap: 15px; } .box { min-height: 350px; } .modal-card{ padding: 30px 20px;} .modal-img{ width: 180px; height: 180px;} }
     </style>
 </head>
 <body>
@@ -215,24 +99,30 @@
         
         <div class="target-hint">要拼的字是 👉 <span id="target-word">字</span></div>
         
-        <div class="game-wrapper">
-            <div class="box parts-pool" id="pool">
-                <div class="box-title pool-title">1️⃣ 點住積木拖過去</div>
-            </div>
-            <div class="box drop-zone" id="zone">
-                <div class="box-title zone-title">2️⃣ 在這裡拼起來</div>
-                <p id="zone-guide">把積木放進來喔！</p>
-            </div>
+        <div class="game-wrapper" id="game-wrapper">
+            <div class="box parts-pool" id="pool"><div class="box-title pool-title">1️⃣ 點住積木拖過去</div></div>
+            <div class="box drop-zone" id="zone"><div class="box-title zone-title">2️⃣ 在這裡拼起來</div><p id="zone-guide">把積木放進來喔！</p></div>
         </div>
         <div class="status-area">
             <div id="message"></div>
-            <button id="next-btn" onclick="nextWord()">拼好了！換下一題 ➡️</button>
+            <button id="next-btn" onclick="goToMenu()">🏠 回到樂園大廳</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="vocab-modal">
+        <div class="modal-card">
+            <h2 class="modal-word" id="modal-word">語詞</h2>
+            <img src="" id="modal-img" class="modal-img" alt="語詞圖片" onerror="this.style.display='none'">
+            <div class="modal-btns">
+                <button class="btn-audio" onclick="playCurrentAudio()">🔊 聽聽看</button>
+                <button class="btn-next-card" onclick="closeAndNext()">換下一題 ➡️</button>
+            </div>
         </div>
     </div>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-        const lessonId = urlParams.get('id') || "3"; // 預設抓第三課
+        const lessonId = urlParams.get('id') || "3"; 
         
         const wordData = allLessonsData[lessonId] ? allLessonsData[lessonId].level1 : [];
 
@@ -255,9 +145,9 @@
         }
 
         function initGame() {
-            const pool = document.getElementById('pool'), targetWord = document.getElementById('target-word'), msg = document.getElementById('message'), guide = document.getElementById('zone-guide'), nextBtn = document.getElementById('next-btn');
+            const pool = document.getElementById('pool'), targetWord = document.getElementById('target-word'), msg = document.getElementById('message'), guide = document.getElementById('zone-guide');
             document.querySelectorAll('.part-img').forEach(img => img.remove());
-            msg.innerText = ''; nextBtn.style.display = 'none'; nextBtn.innerText = '拼好了！換下一題 ➡️'; nextBtn.onclick = nextWord;
+            
             placedCount = 0; guide.style.display = 'block';
             let data = gameWords[currentIdx]; targetWord.innerText = data.word;
             let shuffledParts = [...data.parts].sort(() => Math.random() - 0.5);
@@ -279,109 +169,105 @@
             });
         }
 
+        // 拖曳邏輯維持不變
         function handlePointerDown(e) {
-            e.preventDefault();
-            activePart = this;
-            activePart.style.zIndex = 1000;
-            activePart.setPointerCapture(e.pointerId);
-
+            e.preventDefault(); activePart = this; activePart.style.zIndex = 1000; activePart.setPointerCapture(e.pointerId);
             let rect = activePart.getBoundingClientRect();
-            
             if (activePart.parentElement.id === 'pool') {
-                offsetX = e.clientX - rect.left;
-                offsetY = e.clientY - rect.top;
-                activePart.style.position = 'fixed';
-                activePart.style.left = rect.left + 'px';
-                activePart.style.top = rect.top + 'px';
-                document.body.appendChild(activePart);
+                offsetX = e.clientX - rect.left; offsetY = e.clientY - rect.top; activePart.style.position = 'fixed';
+                activePart.style.left = rect.left + 'px'; activePart.style.top = rect.top + 'px'; document.body.appendChild(activePart);
             } else if (activePart.parentElement.id === 'zone') {
-                offsetX = e.clientX - rect.left;
-                offsetY = e.clientY - rect.top;
+                offsetX = e.clientX - rect.left; offsetY = e.clientY - rect.top;
             }
-
-            activePart.addEventListener('pointermove', handlePointerMove);
-            activePart.addEventListener('pointerup', handlePointerUp);
+            activePart.addEventListener('pointermove', handlePointerMove); activePart.addEventListener('pointerup', handlePointerUp);
         }
 
         function handlePointerMove(e) {
-            if (!activePart) return;
-            e.preventDefault();
-            
+            if (!activePart) return; e.preventDefault();
             if (activePart.parentElement === document.body) {
-                activePart.style.left = (e.clientX - offsetX) + 'px';
-                activePart.style.top = (e.clientY - offsetY) + 'px';
+                activePart.style.left = (e.clientX - offsetX) + 'px'; activePart.style.top = (e.clientY - offsetY) + 'px';
             } else if (activePart.parentElement.id === 'zone') {
                 let zoneRect = document.getElementById('zone').getBoundingClientRect();
-                let newLeft = e.clientX - zoneRect.left - offsetX;
-                let newTop = e.clientY - zoneRect.top - offsetY;
-                activePart.style.left = newLeft + 'px';
-                activePart.style.top = newTop + 'px';
+                activePart.style.left = (e.clientX - zoneRect.left - offsetX) + 'px'; activePart.style.top = (e.clientY - zoneRect.top - offsetY) + 'px';
             }
         }
 
         function handlePointerUp(e) {
             if (!activePart) return;
-            activePart.releasePointerCapture(e.pointerId);
-            activePart.removeEventListener('pointermove', handlePointerMove);
-            activePart.removeEventListener('pointerup', handlePointerUp);
-            activePart.style.zIndex = 10;
-
-            let zone = document.getElementById('zone');
-            let zoneRect = zone.getBoundingClientRect();
-            let pool = document.getElementById('pool');
-
+            activePart.releasePointerCapture(e.pointerId); activePart.removeEventListener('pointermove', handlePointerMove); activePart.removeEventListener('pointerup', handlePointerUp); activePart.style.zIndex = 10;
+            let zone = document.getElementById('zone'), zoneRect = zone.getBoundingClientRect(), pool = document.getElementById('pool');
             let droppedInZone = ( e.clientX >= zoneRect.left && e.clientX <= zoneRect.right && e.clientY >= zoneRect.top && e.clientY <= zoneRect.bottom );
 
             if (droppedInZone) {
-                if (activePart.parentElement === document.body) {
-                    zone.appendChild(activePart);
-                    document.getElementById('zone-guide').style.display = 'none';
-                    placedCount++;
-                }
+                if (activePart.parentElement === document.body) { zone.appendChild(activePart); document.getElementById('zone-guide').style.display = 'none'; placedCount++; }
                 activePart.style.position = 'absolute';
-                let newLeft = e.clientX - zoneRect.left - offsetX;
-                let newTop = e.clientY - zoneRect.top - offsetY;
-                activePart.style.left = newLeft + 'px';
-                activePart.style.top = newTop + 'px';
-                
+                activePart.style.left = (e.clientX - zoneRect.left - offsetX) + 'px'; activePart.style.top = (e.clientY - zoneRect.top - offsetY) + 'px';
                 checkWin();
             } else {
                 if (activePart.parentElement === zone) placedCount--;
-                pool.appendChild(activePart);
-                activePart.style.position = 'relative';
-                activePart.style.left = 'auto';
-                activePart.style.top = 'auto';
-                
-                if (placedCount < gameWords[currentIdx].parts.length) { 
-                    document.getElementById('message').innerText = ''; 
-                    document.getElementById('next-btn').style.display = 'none'; 
-                }
-                if (document.querySelectorAll('#zone .part-img').length === 0) {
-                    document.getElementById('zone-guide').style.display = 'block';
-                }
+                pool.appendChild(activePart); activePart.style.position = 'relative'; activePart.style.left = 'auto'; activePart.style.top = 'auto';
+                if (document.querySelectorAll('#zone .part-img').length === 0) { document.getElementById('zone-guide').style.display = 'block'; }
             }
             activePart = null;
         }
         
+        // 🌟 核心修改：拼完後顯示語詞卡片
         function checkWin() { 
             if (placedCount === gameWords[currentIdx].parts.length) { 
-                document.getElementById('message').innerText = "🌟 檢查看看拼得對不對喔！ 🌟"; 
-                document.getElementById('next-btn').style.display = 'inline-block'; 
+                setTimeout(showVocabModal, 500); // 延遲半秒鐘彈出，讓孩子有時間看到拼好的字
             } 
         }
-        
-        function nextWord() { 
+
+        function showVocabModal() {
+            const data = gameWords[currentIdx];
+            const modal = document.getElementById('vocab-modal');
+            
+            // 填入資料 (如果有 vocab 就用 vocab，沒有就用單字)
+            const showText = data.vocab || data.word;
+            document.getElementById('modal-word').innerText = showText;
+            
+            const imgEl = document.getElementById('modal-img');
+            if(data.vocabImg) {
+                imgEl.src = data.vocabImg;
+                imgEl.style.display = 'block';
+            } else {
+                imgEl.style.display = 'none';
+            }
+            
+            modal.classList.add('active');
+            playAudio(showText); // 自動發音
+        }
+
+        // 🌟 Web Speech API 發音功能
+        function playAudio(text) {
+            const synth = window.speechSynthesis;
+            synth.cancel(); // 停止上一句
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.lang = 'zh-TW';
+            utter.rate = 0.85; // 語速調慢一點點，適合一年級
+            synth.speak(utter);
+        }
+
+        function playCurrentAudio() {
+            const data = gameWords[currentIdx];
+            playAudio(data.vocab || data.word);
+        }
+
+        function closeAndNext() {
+            document.getElementById('vocab-modal').classList.remove('active');
             currentIdx++; 
             if (currentIdx < gameWords.length) { 
                 initGame(); 
             } else { 
+                // 遊戲結束
+                document.getElementById('game-wrapper').style.display = 'none';
                 document.getElementById('message').style.color = "#d81b60";
-                document.getElementById('message').innerText = "🎉 哇！你全部都拼對了！超棒！"; 
-                let btn = document.getElementById('next-btn');
-                btn.innerText = '🏠 回到樂園大廳';
-                btn.onclick = () => { window.location.href = `index.html`; };
+                document.getElementById('message').innerText = "🎉 哇！你全部都過關了！超厲害！"; 
+                document.getElementById('next-btn').style.display = 'inline-block';
             } 
         }
+
+        function goToMenu() { window.location.href = `index.html`; }
         
         window.onload = startGame;
     </script>
