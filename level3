@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第三關：短語練習</title>
+    <script src="data.js"></script>
+    <style>
+        body { 
+            font-family: "jf-open-huninn", "Microsoft JhengHei", sans-serif; 
+            background-color: #e8f5e9; /* 小熊關卡的抹茶綠色系 */
+            margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; box-sizing: border-box; 
+        }
+        
+        .main-container { width: 100%; flex-grow: 1; display: flex; flex-direction: column; align-items: center; padding: 30px 4%; box-sizing: border-box; }
+        .header-area { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        
+        h1 { color: #388e3c; font-size: clamp(32px, 4vw, 55px); margin: 0; text-shadow: 2px 2px 0px #c8e6c9; }
+        .header-btns { display: flex; gap: 15px; z-index: 50; }
+        
+        .nav-btn { 
+            background-color: #ffb74d; color: #ffffff; text-decoration: none; font-size: clamp(16px, 1.5vw, 24px); font-weight: bold; 
+            padding: 12px 25px; border-radius: 50px; box-shadow: 0 5px 0 #f57c00; transition: 0.2s; border: 3px solid #fff; display: flex; align-items: center;
+        }
+        .nav-btn:hover { transform: translateY(4px); box-shadow: 0 0 0 #f57c00; background-color: #ffa726; }
+
+        .hint-box {
+            display: flex; align-items: center; justify-content: center; gap: 15px; background: #fff; padding: 15px 40px; border-radius: 50px;
+            box-shadow: 0 8px 15px rgba(56, 142, 60, 0.15); border: 4px solid #a5d6a7; margin-bottom: 30px;
+        }
+        .hint-text { font-size: clamp(24px, 2.5vw, 36px); color: #2e7d32; font-weight: bold; }
+
+        .game-board {
+            background: #ffffff; border-radius: 40px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); border: 8px solid #fff;
+            padding: 40px; width: 100%; max-width: 1000px; text-align: center; display: flex; flex-direction: column; gap: 30px;
+        }
+
+        /* 答題區 (上方) */
+        .answer-zone {
+            min-height: 120px; border-bottom: 6px dashed #c8e6c9; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 15px; padding-bottom: 20px;
+        }
+        
+        /* 選字區 (下方) */
+        .pool-zone {
+            min-height: 120px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 15px;
+        }
+
+        /* 文字方塊 */
+        .word-block {
+            font-size: clamp(28px, 3vw, 45px); font-weight: bold; color: #fff; background: #66bb6a; 
+            border: 4px solid #4caf50; border-radius: 20px; padding: 15px 25px; cursor: pointer; 
+            box-shadow: 0 6px 0 #388e3c; transition: transform 0.1s, box-shadow 0.1s;
+        }
+        .word-block:active { transform: translateY(6px); box-shadow: 0 0 0 #388e3c; }
+        
+        /* 空白佔位符 (被選走後留下的空位) */
+        .word-placeholder {
+            background: #f1f8e9; border: 4px dashed #c8e6c9; border-radius: 20px; color: transparent; pointer-events: none;
+        }
+
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
+        .shake { animation: shake 0.4s; background: #ef5350 !important; border-color: #c62828 !important; box-shadow: 0 6px 0 #c62828 !important; }
+
+        #message { font-size: clamp(28px, 3vw, 40px); color: #ff9800; font-weight: bold; min-height: 50px; margin-top: 20px;}
+        .next-btn { 
+            background-color: #4fc3f7; color: white; font-size: clamp(24px, 2.5vw, 36px); font-weight: bold; 
+            padding: 15px 40px; border-radius: 50px; border: 4px solid #fff; cursor: pointer; box-shadow: 0 8px 0 #0288d1; display: none; margin: 20px auto 0;
+        }
+        .next-btn:active { transform: translateY(8px); box-shadow: none; }
+
+        @media (max-width: 768px) { .game-board { padding: 20px; } .word-block { padding: 10px 15px; } }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="header-area">
+            <h1>🐻 第三關：短語練習 💬</h1>
+            <div class="header-btns"><a href="index.html" class="nav-btn">🏠 回首頁</a></div>
+        </div>
+        
+        <div class="hint-box">
+            <span class="hint-text">請點擊下方的積木，排出正確的句子！</span>
+        </div>
+        
+        <div class="game-board">
+            <div class="answer-zone" id="answer-zone"></div>
+            <div class="pool-zone" id="pool-zone"></div>
+        </div>
+        
+        <div id="message"></div>
+        <button id="next-btn" class="next-btn" onclick="nextQuestion()">換下一題 ➡️</button>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const lessonId = urlParams.get('id') || "3"; 
+        const levelData = allLessonsData[lessonId] ? allLessonsData[lessonId].level3 : [];
+        
+        let currentIdx = 0;
+        let originalOrder = [];
+        let shuffledBlocks = [];
+        let synth = window.speechSynthesis;
+
+        function startGame() {
+            if(!levelData || levelData.length === 0) { 
+                document.getElementById('pool-zone').innerHTML = "<h2 style='color:red'>這課沒有短語題庫喔！</h2>"; return; 
+            }
+            currentIdx = 0; loadQuestion();
+        }
+
+        function loadQuestion() {
+            document.getElementById('message').innerText = "";
+            document.getElementById('next-btn').style.display = "none";
+            
+            const q = levelData[currentIdx];
+            originalOrder = [...q.parts];
+            
+            // 打亂陣列，並建立物件來追蹤每個方塊的狀態
+            let tempParts = [...q.parts].sort(() => Math.random() - 0.5);
+            shuffledBlocks = tempParts.map((text, idx) => ({ id: `block-${idx}`, text: text, inAnswer: false }));
+            
+            renderBoard();
+        }
+
+        function renderBoard() {
+            const answerZone = document.getElementById('answer-zone');
+            const poolZone = document.getElementById('pool-zone');
+            answerZone.innerHTML = ''; poolZone.innerHTML = '';
+
+            // 渲染選字區 (下方)
+            shuffledBlocks.forEach(block => {
+                let btn = document.createElement('button');
+                btn.innerText = block.text;
+                
+                if (block.inAnswer) {
+                    btn.className = 'word-block word-placeholder';
+                } else {
+                    btn.className = 'word-block';
+                    btn.onclick = () => moveToAnswer(block.id);
+                }
+                poolZone.appendChild(btn);
+            });
+
+            // 渲染答題區 (上方)，根據點擊順序排列
+            let answerBlocks = shuffledBlocks.filter(b => b.inAnswer).sort((a, b) => a.order - b.order);
+            answerBlocks.forEach(block => {
+                let btn = document.createElement('button');
+                btn.className = 'word-block';
+                btn.innerText = block.text;
+                btn.onclick = () => returnToPool(block.id);
+                answerZone.appendChild(btn);
+            });
+
+            // 檢查是否全部排完
+            if (answerBlocks.length === originalOrder.length) {
+                checkAnswer(answerBlocks);
+            }
+        }
+
+        let clickOrder = 0;
+        function moveToAnswer(id) {
+            let block = shuffledBlocks.find(b => b.id === id);
+            block.inAnswer = true;
+            block.order = clickOrder++;
+            renderBoard();
+        }
+
+        function returnToPool(id) {
+            let block = shuffledBlocks.find(b => b.id === id);
+            block.inAnswer = false;
+            renderBoard();
+        }
+
+        function checkAnswer(answerBlocks) {
+            let currentSentence = answerBlocks.map(b => b.text).join("");
+            let correctSentence = originalOrder.join("");
+
+            if (currentSentence === correctSentence) {
+                document.getElementById('message').innerText = "🌟 拼對囉！太厲害了！";
+                document.getElementById('message').style.color = "#2e7d32";
+                document.getElementById('next-btn').style.display = "block";
+                
+                // 停止所有方塊的點擊
+                document.querySelectorAll('.word-block').forEach(btn => btn.onclick = null);
+                
+                // 語音朗讀
+                synth.cancel();
+                let utter = new SpeechSynthesisUtterance(correctSentence);
+                utter.lang = 'zh-TW'; utter.rate = 0.85;
+                synth.speak(utter);
+            } else {
+                document.getElementById('message').innerText = "哎呀，順序怪怪的，再排排看！";
+                document.getElementById('message').style.color = "#e53935";
+                const ansZoneBtns = document.getElementById('answer-zone').querySelectorAll('.word-block');
+                ansZoneBtns.forEach(btn => {
+                    btn.classList.add('shake');
+                    setTimeout(() => btn.classList.remove('shake'), 400);
+                });
+            }
+        }
+
+        function nextQuestion() {
+            currentIdx++;
+            if (currentIdx < levelData.length) {
+                loadQuestion();
+            } else {
+                document.getElementById('answer-zone').innerHTML = "";
+                document.getElementById('pool-zone').innerHTML = "";
+                document.getElementById('message').innerHTML = "🎉 恭喜你！所有的短語都拼對了！<br><br><a href='index.html' class='next-btn' style='display:inline-block; text-decoration:none;'>🏠 回到樂園</a>";
+                document.getElementById('next-btn').style.display = "none";
+            }
+        }
+
+        window.onload = startGame;
+    </script>
+</body>
+</html>
