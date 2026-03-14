@@ -51,10 +51,47 @@ const allLessonsData = {
             { word: "機", radical: "木", options: ["木", "戈"] }
         ] 
     },
-    
-    // ================= 第二課 =================
-    "2": { title: "第二課：(準備中)", level1: [], level2: [], level3: [], level4: [] },
-
+   // ================= 第二課 =================
+    "2": { 
+        title: "第二課：春雨是什麼顏色", 
+        level1: [
+            // 5個部件
+            { word: "顏", parts: ["images/L2/筆順-顏-部件-1.png", "images/L2/筆順-顏-部件-2.png", "images/L2/筆順-顏-部件-3.png", "images/L2/筆順-顏-部件-4.png", "images/L2/筆順-顏-部件-5.png"], pos: [{x: 50, y: 180}, {x: 90, y: 180}, {x: 130, y: 180}, {x: 170, y: 180}, {x: 210, y: 180}], vocab: "顏色", vocabImg: "images/L2/vocab-顏色.png" },
+            // 2個部件
+            { word: "色", parts: ["images/L2/筆順-色-部件-1.png", "images/L2/筆順-色-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "調色盤", vocabImg: "images/L2/vocab-調色盤.png" },
+            // 2個部件
+            { word: "細", parts: ["images/L2/筆順-細-部件-1.png", "images/L2/筆順-細-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "細心", vocabImg: "images/L2/vocab-細心.png" },
+            // 3個部件
+            { word: "著", parts: ["images/L2/筆順-著-部件-1.png", "images/L2/筆順-著-部件-2.png", "images/L2/筆順-著-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "聽著", vocabImg: "images/L2/vocab-聽著.png" },
+            // 2個部件
+            { word: "問", parts: ["images/L2/筆順-問-部件-1.png", "images/L2/筆順-問-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "問號", vocabImg: "images/L2/vocab-問號.png" },
+            // 2個部件
+            { word: "鳥", parts: ["images/L2/筆順-鳥-部件-1.png", "images/L2/筆順-鳥-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "小鳥", vocabImg: "images/L2/vocab-小鳥.png" },
+            // 3個部件
+            { word: "綠", parts: ["images/L2/筆順-綠-部件-1.png", "images/L2/筆順-綠-部件-2.png", "images/L2/筆順-綠-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "綠茶", vocabImg: "images/L2/vocab-綠茶.png" },
+            // 2個部件
+            { word: "看", parts: ["images/L2/筆順-看-部件-1.png", "images/L2/筆順-看-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "偷看", vocabImg: "images/L2/vocab-偷看.png" },
+            // 4個部件
+            { word: "藍", parts: ["images/L2/筆順-藍-部件-1.png", "images/L2/筆順-藍-部件-2.png", "images/L2/筆順-藍-部件-3.png", "images/L2/筆順-藍-部件-4.png"], pos: [{x: 90, y: 130}, {x: 150, y: 130}, {x: 90, y: 180}, {x: 150, y: 180}], vocab: "藍莓", vocabImg: "images/L2/vocab-藍莓.png" },
+            // 3個部件
+            { word: "空", parts: ["images/L2/筆順-空-部件-1.png", "images/L2/筆順-空-部件-2.png", "images/L2/筆順-空-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "空氣", vocabImg: "images/L2/vocab-空氣.png" },
+            // 2個部件
+            { word: "媽", parts: ["images/L2/筆順-媽-部件-1.png", "images/L2/筆順-媽-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "媽媽", vocabImg: "images/L2/vocab-媽媽.png" },
+            // 3個部件
+            { word: "彩", parts: ["images/L2/筆順-彩-部件-1.png", "images/L2/筆順-彩-部件-2.png", "images/L2/筆順-彩-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "彩色筆", vocabImg: "images/L2/vocab-彩色筆.png" },
+            // 2個部件
+            { word: "中", parts: ["images/L2/筆順-中-部件-1.png", "images/L2/筆順-中-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "中文", vocabImg: "images/L2/vocab-中文.png" },
+            // 2個部件
+            { word: "虹", parts: ["images/L2/筆順-虹-部件-1.png", "images/L2/筆順-虹-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "彩虹", vocabImg: "images/L2/vocab-彩虹.png" },
+            // 2個部件
+            { word: "蜻", parts: ["images/L2/筆順-蜻-部件-1.png", "images/L2/筆順-蜻-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "蜻蜓", vocabImg: "images/L2/vocab-蜻蜓.png" },
+            // 3個部件
+            { word: "蜓", parts: ["images/L2/筆順-蜓-部件-1.png", "images/L2/筆順-蜓-部件-2.png", "images/L2/筆順-蜓-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "蜻蜓", vocabImg: "images/L2/vocab-蜻蜓.png" }
+        ], 
+        level2: [], 
+        level3: [], 
+        level4: [] 
+    },
     // ================= 第三課 =================
     "3": { 
         title: "第三課：山中音樂會", 
