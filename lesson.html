@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>一年級國語可愛樂園</title>
+    <script src="data.js"></script>
     <style>
         /* 溫暖的奶油鵝黃色背景 */
         body { 
@@ -158,11 +159,11 @@
         <div class="bg-decoration dec-1">🎈</div>
         <div class="bg-decoration dec-2">🌈</div>
 
-        <a href="index.html" class="back-btn">🏠 回首頁</a>
+        <a href="index.html" class="back-btn">🏠 回 12 課大廳</a>
 
         <div class="header-area">
             <h1>🐻 可愛國語樂園 🐰</h1>
-            <p class="subtitle" id="lesson-title-display">請選擇你要挑戰的遊戲喔！</p>
+            <p class="subtitle" id="lesson-title-display">載入中...</p>
         </div>
         
         <div class="level-container">
@@ -180,33 +181,40 @@
             
             <a href="level3.html" id="link-lvl3" class="level-card card-3">
                 <div class="level-icon">🐻</div>
-                <div class="level-title">第三關<br>短語練習</div>
-                <div class="level-desc">把句子變長長！</div>
+                <div class="level-title">第三關<br>短語接力</div>
+                <div class="level-desc">兩人合作拼句子！</div>
             </a>
             
             <a href="level4.html" id="link-lvl4" class="level-card card-4">
                 <div class="level-icon">🦊</div>
                 <div class="level-title">第四關<br>部首找找看</div>
-                <div class="level-desc">猜猜部首在哪裡？</div>
+                <div class="level-desc">兩人比賽找部首！</div>
             </a>
         </div>
     </div>
 
     <script>
         window.onload = function() {
-            // 如果您未來有用到 data.js 來控制不同課文，可以保留這段：
+            // 從網址抓取 id 參數，如果沒有就預設為 "1"
             const urlParams = new URLSearchParams(window.location.search);
-            const lessonId = urlParams.get('id');
+            const lessonId = urlParams.get('id') || "1";
 
-            // 如果有帶入課次，自動修改標題跟連結
-            if (lessonId && typeof allLessonsData !== 'undefined' && allLessonsData[lessonId]) {
+            // 確保 data.js 有成功載入，且該課資料存在
+            if (typeof allLessonsData !== 'undefined' && allLessonsData[lessonId]) {
                 const lessonInfo = allLessonsData[lessonId];
+                
+                // 把大標題換成目前這課的名稱
                 document.getElementById('lesson-title-display').innerText = "🌟 " + lessonInfo.title + " 🌟";
 
+                // 動態把這四個關卡的按鈕加上 "?id=X"，讓每一關知道現在是第幾課
                 document.getElementById('link-lvl1').href = `level1.html?id=${lessonId}`;
                 document.getElementById('link-lvl2').href = `level2.html?id=${lessonId}`;
                 document.getElementById('link-lvl3').href = `level3.html?id=${lessonId}`;
                 document.getElementById('link-lvl4').href = `level4.html?id=${lessonId}`;
+            } else {
+                // 萬一找不到資料，顯示錯誤提醒
+                document.getElementById('lesson-title-display').innerText = "找不到這課的資料喔！";
+                document.getElementById('lesson-title-display').style.color = "red";
             }
         };
     </script>
