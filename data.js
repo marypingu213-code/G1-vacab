@@ -1,17 +1,17 @@
 const allLessonsData = {
     // ================= 第一課 =================
     "1": { 
-        title: "第一課：太陽是充電機", 
+        title: "第一課：為小花充充電", 
         level1: [
             { word: "太", parts: ["images/L1/筆順-太-部件-1.png", "images/L1/筆順-太-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "太陽", vocabImg: "images/L1/vocab-太陽.png" },
             { word: "充", parts: ["images/L1/筆順-充-部件-1.png", "images/L1/筆順-充-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "充電", vocabImg: "images/L1/vocab-充電.png" },
-            { word: "電", parts: ["images/L1/筆順-電-部件-1.png", "images/L1/筆順-電-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "電燈", vocabImg: "images/L1/vocab-電燈.png" },
+            { word: "電", parts: ["images/L1/筆順-電-部件-1.png", "images/L1/筆順-電-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "充電", vocabImg: "images/L1/vocab-充電.png" },
             { word: "雨", parts: ["images/L1/筆順-雨-部件-1.png", "images/L1/筆順-雨-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "下雨", vocabImg: "images/L1/vocab-下雨.png" },
             { word: "過", parts: ["images/L1/筆順-過-部件-1.png", "images/L1/筆順-過-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "過年", vocabImg: "images/L1/vocab-過年.png" },
             { word: "後", parts: ["images/L1/筆順-後-部件-1.png", "images/L1/筆順-後-部件-2.png", "images/L1/筆順-後-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "後悔", vocabImg: "images/L1/vocab-後悔.png" },
-            { word: "為", parts: ["images/L1/筆順-為-部件-1.png", "images/L1/筆順-為-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "因為", vocabImg: "images/L1/vocab-因為.png" },
+            { word: "為", parts: ["images/L1/筆順-為-部件-1.png", "images/L1/筆順-為-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "為什麼", vocabImg: "images/L1/vocab-為什麼.png" },
             { word: "冬", parts: ["images/L1/筆順-冬-部件-1.png", "images/L1/筆順-冬-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "冬眠", vocabImg: "images/L1/vocab-冬眠.png" },
-            { word: "草", parts: ["images/L1/筆順-草-部件-1.png", "images/L1/筆順-草-部件-2.png", "images/L1/筆順-草-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "草地", vocabImg: "images/L1/vocab-草地.png" },
+            { word: "草", parts: ["images/L1/筆順-草-部件-1.png", "images/L1/筆順-草-部件-2.png", "images/L1/筆順-草-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "小草", vocabImg: "images/L1/vocab-小草.png" },
             { word: "冒", parts: ["images/L1/筆順-冒-部件-1.png", "images/L1/筆順-冒-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "感冒", vocabImg: "images/L1/vocab-感冒.png" },
             { word: "哭", parts: ["images/L1/筆順-哭-部件-1.png", "images/L1/筆順-哭-部件-2.png", "images/L1/筆順-哭-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "大哭", vocabImg: "images/L1/vocab-大哭.png" },
             { word: "心", parts: ["images/L1/筆順-心-部件-1.png"], pos: [{x: 120, y: 150}], vocab: "愛心", vocabImg: "images/L1/vocab-愛心.png" },
@@ -69,7 +69,7 @@ const allLessonsData = {
             { word: "河", parts: ["images/L3/筆順-河-部件-1.png", "images/L3/筆順-河-部件-2.png", "images/L3/筆順-河-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "小河", vocabImg: "images/L3/vocab-小河.png" },
             { word: "林", parts: ["images/L3/筆順-林-部件-1.png", "images/L3/筆順-林-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "樹林", vocabImg: "images/L3/vocab-樹林.png" },
             { word: "間", parts: ["images/L3/筆順-間-部件-1.png", "images/L3/筆順-間-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "中間", vocabImg: "images/L3/vocab-中間.png" },
-            { word: "風", parts: ["images/L3/筆順-風-部件-1.png", "images/L3/筆順-風-部件-2.png", "images/L3/筆順-風-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "龍捲風", vocabImg: "images/L3/vocab-龍捲風.png" },
+            { word: "風", parts: ["images/L3/筆順-風-部件-1.png", "images/L3/筆順-風-部件-2.png", "images/L3/筆順-風-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "龍選風", vocabImg: "images/L3/vocab-龍捲風.png" },
             { word: "跑", parts: ["images/L3/筆順-跑-部件-1.png", "images/L3/筆順-跑-部件-2.png", "images/L3/筆順-跑-部件-3.png", "images/L3/筆順-跑-部件-4.png"], pos: [{x: 90, y: 130}, {x: 150, y: 130}, {x: 90, y: 180}, {x: 150, y: 180}], vocab: "跑步", vocabImg: "images/L3/vocab-跑步.png" },
             { word: "置", parts: ["images/L3/筆順-置-部件-1.png", "images/L3/筆順-置-部件-2.png", "images/L3/筆順-置-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "置物櫃", vocabImg: "images/L3/vocab-置物櫃.png" }
         ], 
@@ -105,5 +105,15 @@ const allLessonsData = {
             { word: "跑", radical: "足", options: ["足", "包"] },
             { word: "置", radical: "网", options: ["网", "直"] }
         ] 
-    }
+    },
+
+    "4": { title: "第四課：(準備中)", level1: [], level2: [], level3: [], level4: [] },
+    "5": { title: "第五課：(準備中)", level1: [], level2: [], level3: [], level4: [] },
+    "6": { title: "第六課：(準備中)", level1: [], level2: [], level3: [], level4: [] },
+    "7": { title: "第七課：(準備中)", level1: [], level2: [], level3: [], level4: [] },
+    "8": { title: "第八課：(準備中)", level1: [], level2: [], level3: [], level4: [] },
+    "9": { title: "第九課：(準備中)", level1: [], level2: [], level3: [], level4: [] },
+    "10": { title: "第十課：(準備中)", level1: [], level2: [], level3: [], level4: [] },
+    "11": { title: "第十一課：(準備中)", level1: [], level2: [], level3: [], level4: [] },
+    "12": { title: "第十二課：(準備中)", level1: [], level2: [], level3: [], level4: [] }
 };
