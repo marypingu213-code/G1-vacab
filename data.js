@@ -1,7 +1,7 @@
 const allLessonsData = {
     // ================= 第一課 =================
     "1": { 
-        title: "第一課：為小花充充電", 
+        title: "第一課：太陽是充電機", 
         level1: [
             { word: "太", parts: ["images/L1/筆順-太-部件-1.png", "images/L1/筆順-太-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "太陽", vocabImg: "images/L1/vocab-太陽.png" },
             { word: "充", parts: ["images/L1/筆順-充-部件-1.png", "images/L1/筆順-充-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "充電", vocabImg: "images/L1/vocab-充電.png" },
