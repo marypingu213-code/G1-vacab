@@ -88,9 +88,42 @@ const allLessonsData = {
             // 3個部件
             { word: "蜓", parts: ["images/L2/筆順-蜓-部件-1.png", "images/L2/筆順-蜓-部件-2.png", "images/L2/筆順-蜓-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "蜻蜓", vocabImg: "images/L2/vocab-蜻蜓.png" }
         ], 
-        level2: [], 
-        level3: [], 
-        level4: [] 
+        // 🌟 第二關：找錯字資料
+        level2: [
+            { text: "下雨過後草地上有很多的睛蜓。", typo: "睛", correct: "蜻", options: ["蜻", "睛", "請"], speakText: "下雨過後草地上有很多的蜻蜓。" },
+            { text: "宇晴最喜歡的顏色是緣色。", typo: "緣", correct: "綠", options: ["綠", "緣", "線"], speakText: "宇晴最喜歡的顏色是綠色。" },
+            { text: "你看過彩紅，有七種顏色。", typo: "紅", correct: "虹", options: ["虹", "紅", "江"], speakText: "你看過彩虹，有七種顏色。" },
+            { text: "今天的天空好籃，我的心情很好。", typo: "籃", correct: "藍", options: ["藍", "籃", "蘭"], speakText: "今天的天空好藍，我的心情很好。" },
+            { text: "如果你有不會的，可以先去間同學。", typo: "間", correct: "問", options: ["問", "間", "聞"], speakText: "如果你有不會的，可以先去問同學。" },
+            { text: "明天要記得帶採色筆喔。", typo: "採", correct: "彩", options: ["彩", "採", "踩"], speakText: "明天要記得帶彩色筆喔。" }
+        ], 
+        // 🌟 第三關：短語練習資料
+        level3: [
+            { parts: ["學校的", "生態池", "有很多的", "蝌蚪"] },
+            { parts: ["天空是", "藍色的", "我的", "心情是", "黃色的"] },
+            { parts: ["媽媽", "告訴", "我", "上課", "要", "聽", "老師的話"] },
+            { parts: ["在台灣", "我們", "說的", "語言", "是", "中文"] },
+            { parts: ["他", "看著", "外面", "發呆"] }
+        ], 
+        // 🌟 第四關：部首二選一資料
+        level4: [
+            { word: "顏", radical: "頁", options: ["頁", "彥"] },
+            { word: "色", radical: "色", options: ["色", "刀"] },
+            { word: "細", radical: "糸", options: ["糸", "田"] },
+            { word: "著", radical: "艸(艹)", options: ["艸(艹)", "者"] },
+            { word: "問", radical: "口", options: ["口", "門"] },
+            { word: "鳥", radical: "鳥", options: ["鳥", "隹"] },
+            { word: "綠", radical: "糸", options: ["糸", "水"] },
+            { word: "看", radical: "目", options: ["目", "手"] },
+            { word: "藍", radical: "艸(艹)", options: ["艸(艹)", "皿"] },
+            { word: "空", radical: "穴", options: ["穴", "工"] },
+            { word: "媽", radical: "女", options: ["女", "馬"] },
+            { word: "彩", radical: "彡", options: ["彡", "木"] },
+            { word: "中", radical: "丨", options: ["丨", "口"] },
+            { word: "虹", radical: "虫", options: ["虫", "工"] },
+            { word: "蜻", radical: "虫", options: ["虫", "青"] },
+            { word: "蜓", radical: "虫", options: ["虫", "廴"] }
+        ]
     },
     // ================= 第三課 =================
     "3": { 
