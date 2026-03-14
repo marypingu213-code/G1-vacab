@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一年級國語樂園 - 課文總覽</title>
+    <script src="data.js"></script>
+    <style>
+        body { 
+            font-family: "jf-open-huninn", "Microsoft JhengHei", sans-serif; 
+            background-color: #fff9e6; 
+            margin: 0; padding: 2vh 2vw; 
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh; box-sizing: border-box; 
+        }
+
+        .main-container {
+            width: 100%; max-width: 1400px; background-color: #ffffff; border-radius: 40px;
+            box-shadow: 0 15px 30px rgba(255, 182, 107, 0.2); border: 8px solid #ffde99;
+            display: flex; flex-direction: column; align-items: center; padding: 30px 2%;
+            box-sizing: border-box; flex-grow: 1;
+        }
+
+        .header-area { text-align: center; margin-bottom: 30px; }
+        h1 { color: #e67e22; font-size: clamp(36px, 4vw, 60px); margin: 0 0 10px 0; text-shadow: 2px 2px 0px #ffeaa7; }
+        .subtitle { font-size: clamp(20px, 2.5vw, 30px); color: #8d6e63; margin: 0; font-weight: bold; background: #fff3e0; padding: 5px 25px; border-radius: 50px; display: inline-block;}
+
+        /* 課文卡片網格 */
+        .lesson-list { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 25px; width: 100%; padding: 10px; box-sizing: border-box;
+        }
+
+        .lesson-card {
+            background-color: #ffffff; border-radius: 25px; text-decoration: none; 
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            padding: 30px 15px; border: 5px solid #ffb6c1; transition: 0.3s; min-height: 120px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.05); cursor: pointer;
+        }
+        
+        .lesson-card:hover { transform: translateY(-8px); box-shadow: 0 15px 25px rgba(255, 182, 193, 0.3); background-color: #fff0f5; }
+        
+        /* 讓不同課文的框框有不同顏色 */
+        .lesson-card:nth-child(4n+1) { border-color: #ffb6c1; }
+        .lesson-card:nth-child(4n+2) { border-color: #90caf9; }
+        .lesson-card:nth-child(4n+3) { border-color: #a5d6a7; }
+        .lesson-card:nth-child(4n+4) { border-color: #ffcc80; }
+
+        .lesson-title { font-size: clamp(24px, 2vw, 32px); font-weight: bold; color: #5d4037; line-height: 1.4; }
+
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="header-area">
+            <h1>🐻 一年級國語樂園 🐰</h1>
+            <p class="subtitle">請選擇今天要挑戰的課文！</p>
+        </div>
+        
+        <div class="lesson-list" id="lesson-container"></div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const container = document.getElementById('lesson-container');
+            if (typeof allLessonsData !== 'undefined') {
+                for (let lessonId in allLessonsData) {
+                    const lessonInfo = allLessonsData[lessonId];
+                    const card = document.createElement('a');
+                    // 🌟 點擊後，帶著課文 ID 跳轉到「動物四關卡 (lesson.html)」
+                    card.href = `lesson.html?id=${lessonId}`; 
+                    card.className = 'lesson-card';
+                    
+                    const title = document.createElement('div');
+                    title.className = 'lesson-title';
+                    title.innerText = lessonInfo.title;
+                    
+                    card.appendChild(title);
+                    container.appendChild(card);
+                }
+            } else {
+                container.innerHTML = '<h2 style="color:red; text-align:center;">找不到 data.js，請確認檔案有上傳！</h2>';
+            }
+        };
+    </script>
+</body>
+</html>
