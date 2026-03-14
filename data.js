@@ -55,40 +55,25 @@ const allLessonsData = {
     "2": { 
         title: "第二課：春雨是什麼顏色", 
         level1: [
-            // 5個部件
-            { word: "顏", parts: ["images/L2/筆順-顏-部件-1.png", "images/L2/筆順-顏-部件-2.png", "images/L2/筆順-顏-部件-3.png", "images/L2/筆順-顏-部件-4.png", "images/L2/筆順-顏-部件-5.png"], pos: [{x: 50, y: 180}, {x: 90, y: 180}, {x: 130, y: 180}, {x: 170, y: 180}, {x: 210, y: 180}], vocab: "顏色", vocabImg: "images/L2/vocab-顏色.png" },
-            // 2個部件
+            // 🌟 加入了 scale: 1.2 讓 5 個部件都稍微放大一點，方便抓取
+            { word: "顏", parts: ["images/L2/筆順-顏-部件-1.png", "images/L2/筆順-顏-部件-2.png", "images/L2/筆順-顏-部件-3.png", "images/L2/筆順-顏-部件-4.png", "images/L2/筆順-顏-部件-5.png"], pos: [{x: 50, y: 180, scale: 1.2}, {x: 90, y: 180, scale: 1.2}, {x: 130, y: 180, scale: 1.2}, {x: 170, y: 180, scale: 1.2}, {x: 210, y: 180, scale: 1.2}], vocab: "顏色", vocabImg: "images/L2/vocab-顏色.png" },
             { word: "色", parts: ["images/L2/筆順-色-部件-1.png", "images/L2/筆順-色-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "調色盤", vocabImg: "images/L2/vocab-調色盤.png" },
-            // 2個部件
             { word: "細", parts: ["images/L2/筆順-細-部件-1.png", "images/L2/筆順-細-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "細心", vocabImg: "images/L2/vocab-細心.png" },
-            // 3個部件
             { word: "著", parts: ["images/L2/筆順-著-部件-1.png", "images/L2/筆順-著-部件-2.png", "images/L2/筆順-著-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "聽著", vocabImg: "images/L2/vocab-聽著.png" },
-            // 2個部件
             { word: "問", parts: ["images/L2/筆順-問-部件-1.png", "images/L2/筆順-問-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "問號", vocabImg: "images/L2/vocab-問號.png" },
-            // 2個部件
             { word: "鳥", parts: ["images/L2/筆順-鳥-部件-1.png", "images/L2/筆順-鳥-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "小鳥", vocabImg: "images/L2/vocab-小鳥.png" },
-            // 3個部件
             { word: "綠", parts: ["images/L2/筆順-綠-部件-1.png", "images/L2/筆順-綠-部件-2.png", "images/L2/筆順-綠-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "綠茶", vocabImg: "images/L2/vocab-綠茶.png" },
-            // 2個部件
             { word: "看", parts: ["images/L2/筆順-看-部件-1.png", "images/L2/筆順-看-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "偷看", vocabImg: "images/L2/vocab-偷看.png" },
-            // 4個部件
             { word: "藍", parts: ["images/L2/筆順-藍-部件-1.png", "images/L2/筆順-藍-部件-2.png", "images/L2/筆順-藍-部件-3.png", "images/L2/筆順-藍-部件-4.png"], pos: [{x: 90, y: 130}, {x: 150, y: 130}, {x: 90, y: 180}, {x: 150, y: 180}], vocab: "藍莓", vocabImg: "images/L2/vocab-藍莓.png" },
-            // 3個部件
             { word: "空", parts: ["images/L2/筆順-空-部件-1.png", "images/L2/筆順-空-部件-2.png", "images/L2/筆順-空-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "空氣", vocabImg: "images/L2/vocab-空氣.png" },
-            // 2個部件
             { word: "媽", parts: ["images/L2/筆順-媽-部件-1.png", "images/L2/筆順-媽-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "媽媽", vocabImg: "images/L2/vocab-媽媽.png" },
-            // 3個部件
             { word: "彩", parts: ["images/L2/筆順-彩-部件-1.png", "images/L2/筆順-彩-部件-2.png", "images/L2/筆順-彩-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "彩色筆", vocabImg: "images/L2/vocab-彩色筆.png" },
-            // 2個部件
-            { word: "中", parts: ["images/L2/筆順-中-部件-1.png", "images/L2/筆順-中-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "中文", vocabImg: "images/L2/vocab-中文.png" },
-            // 2個部件
+            // 🌟 加入了 scale: 1.4 讓「中」的 2 個部件明顯變大
+            { word: "中", parts: ["images/L2/筆順-中-部件-1.png", "images/L2/筆順-中-部件-2.png"], pos: [{x: 100, y: 110, scale: 1.4}, {x: 100, y: 180, scale: 1.4}], vocab: "中文", vocabImg: "images/L2/vocab-中文.png" },
             { word: "虹", parts: ["images/L2/筆順-虹-部件-1.png", "images/L2/筆順-虹-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "彩虹", vocabImg: "images/L2/vocab-彩虹.png" },
-            // 2個部件
             { word: "蜻", parts: ["images/L2/筆順-蜻-部件-1.png", "images/L2/筆順-蜻-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "蜻蜓", vocabImg: "images/L2/vocab-蜻蜓.png" },
-            // 3個部件
             { word: "蜓", parts: ["images/L2/筆順-蜓-部件-1.png", "images/L2/筆順-蜓-部件-2.png", "images/L2/筆順-蜓-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "蜻蜓", vocabImg: "images/L2/vocab-蜻蜓.png" }
         ], 
-        // 🌟 第二關：找錯字資料
         level2: [
             { text: "下雨過後草地上有很多的睛蜓。", typo: "睛", correct: "蜻", options: ["蜻", "睛", "請"], speakText: "下雨過後草地上有很多的蜻蜓。" },
             { text: "宇晴最喜歡的顏色是緣色。", typo: "緣", correct: "綠", options: ["綠", "緣", "線"], speakText: "宇晴最喜歡的顏色是綠色。" },
@@ -97,7 +82,6 @@ const allLessonsData = {
             { text: "如果你有不會的，可以先去間同學。", typo: "間", correct: "問", options: ["問", "間", "聞"], speakText: "如果你有不會的，可以先去問同學。" },
             { text: "明天要記得帶採色筆喔。", typo: "採", correct: "彩", options: ["彩", "採", "踩"], speakText: "明天要記得帶彩色筆喔。" }
         ], 
-        // 🌟 第三關：短語練習資料
         level3: [
             { parts: ["學校的", "生態池", "有很多的", "蝌蚪"] },
             { parts: ["天空是", "藍色的", "我的", "心情是", "黃色的"] },
@@ -105,7 +89,6 @@ const allLessonsData = {
             { parts: ["在台灣", "我們", "說的", "語言", "是", "中文"] },
             { parts: ["他", "看著", "外面", "發呆"] }
         ], 
-        // 🌟 第四關：部首二選一資料
         level4: [
             { word: "顏", radical: "頁", options: ["頁", "彥"] },
             { word: "色", radical: "色", options: ["色", "刀"] },
@@ -123,7 +106,7 @@ const allLessonsData = {
             { word: "虹", radical: "虫", options: ["虫", "工"] },
             { word: "蜻", radical: "虫", options: ["虫", "青"] },
             { word: "蜓", radical: "虫", options: ["虫", "廴"] }
-        ]
+        ] 
     },
     // ================= 第三課 =================
     "3": { 
@@ -139,7 +122,7 @@ const allLessonsData = {
             { word: "河", parts: ["images/L3/筆順-河-部件-1.png", "images/L3/筆順-河-部件-2.png", "images/L3/筆順-河-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "小河", vocabImg: "images/L3/vocab-小河.png" },
             { word: "林", parts: ["images/L3/筆順-林-部件-1.png", "images/L3/筆順-林-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "樹林", vocabImg: "images/L3/vocab-樹林.png" },
             { word: "間", parts: ["images/L3/筆順-間-部件-1.png", "images/L3/筆順-間-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "中間", vocabImg: "images/L3/vocab-中間.png" },
-            { word: "風", parts: ["images/L3/筆順-風-部件-1.png", "images/L3/筆順-風-部件-2.png", "images/L3/筆順-風-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "龍選風", vocabImg: "images/L3/vocab-龍捲風.png" },
+            { word: "風", parts: ["images/L3/筆順-風-部件-1.png", "images/L3/筆順-風-部件-2.png", "images/L3/筆順-風-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "龍捲風", vocabImg: "images/L3/vocab-龍捲風.png" },
             { word: "跑", parts: ["images/L3/筆順-跑-部件-1.png", "images/L3/筆順-跑-部件-2.png", "images/L3/筆順-跑-部件-3.png", "images/L3/筆順-跑-部件-4.png"], pos: [{x: 90, y: 130}, {x: 150, y: 130}, {x: 90, y: 180}, {x: 150, y: 180}], vocab: "跑步", vocabImg: "images/L3/vocab-跑步.png" },
             { word: "置", parts: ["images/L3/筆順-置-部件-1.png", "images/L3/筆順-置-部件-2.png", "images/L3/筆順-置-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "置物櫃", vocabImg: "images/L3/vocab-置物櫃.png" }
         ], 
@@ -177,13 +160,13 @@ const allLessonsData = {
         ] 
     },
 
-    "4": { title: "第四課：(準備中)", level1: [], level2: [], level3: [], level4: [] },
-    "5": { title: "第五課：(準備中)", level1: [], level2: [], level3: [], level4: [] },
-    "6": { title: "第六課：(準備中)", level1: [], level2: [], level3: [], level4: [] },
-    "7": { title: "第七課：(準備中)", level1: [], level2: [], level3: [], level4: [] },
-    "8": { title: "第八課：(準備中)", level1: [], level2: [], level3: [], level4: [] },
-    "9": { title: "第九課：(準備中)", level1: [], level2: [], level3: [], level4: [] },
-    "10": { title: "第十課：(準備中)", level1: [], level2: [], level3: [], level4: [] },
-    "11": { title: "第十一課：(準備中)", level1: [], level2: [], level3: [], level4: [] },
-    "12": { title: "第十二課：(準備中)", level1: [], level2: [], level3: [], level4: [] }
+    "4": { title: "第四課：書是我的好朋友", level1: [], level2: [], level3: [], level4: [] },
+    "5": { title: "第五課：風喜歡跟我玩", level1: [], level2: [], level3: [], level4: [] },
+    "6": { title: "第六課：鄰居的小孩", level1: [], level2: [], level3: [], level4: [] },
+    "7": { title: "第七課：畫畫", level1: [], level2: [], level3: [], level4: [] },
+    "8": { title: "第八課：給松鼠的卡片", level1: [], level2: [], level3: [], level4: [] },
+    "9": { title: "第九課：張奶奶的寶貝", level1: [], level2: [], level3: [], level4: [] },
+    "10": { title: "第十課：井裡的青蛙", level1: [], level2: [], level3: [], level4: [] },
+    "11": { title: "第十一課：吃星星的鴨子", level1: [], level2: [], level3: [], level4: [] },
+    "12": { title: "第十二課：快樂不只一半", level1: [], level2: [], level3: [], level4: [] }
 };
