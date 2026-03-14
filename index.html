@@ -6,47 +6,55 @@
     <title>一年級國語樂園 - 課文總覽</title>
     <script src="data.js"></script>
     <style>
+        /* 溫暖的奶油鵝黃色背景，鎖定高度不出現捲軸 */
         body { 
             font-family: "jf-open-huninn", "Microsoft JhengHei", sans-serif; 
             background-color: #fff9e6; 
             margin: 0; padding: 2vh 2vw; 
-            display: flex; flex-direction: column; align-items: center; min-height: 100vh; box-sizing: border-box; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            height: 100vh; width: 100vw; box-sizing: border-box; overflow: hidden;
         }
 
+        /* 滿版大看板 */
         .main-container {
-            width: 100%; max-width: 1400px; background-color: #ffffff; border-radius: 40px;
+            width: 100%; height: 100%; max-width: 1800px; max-height: 1080px; 
+            background-color: #ffffff; border-radius: 40px;
             box-shadow: 0 15px 30px rgba(255, 182, 107, 0.2); border: 8px solid #ffde99;
-            display: flex; flex-direction: column; align-items: center; padding: 30px 2%;
-            box-sizing: border-box; flex-grow: 1;
+            display: flex; flex-direction: column; align-items: center; padding: 2% 3%;
+            box-sizing: border-box;
         }
 
-        .header-area { text-align: center; margin-bottom: 30px; }
-        h1 { color: #e67e22; font-size: clamp(36px, 4vw, 60px); margin: 0 0 10px 0; text-shadow: 2px 2px 0px #ffeaa7; }
-        .subtitle { font-size: clamp(20px, 2.5vw, 30px); color: #8d6e63; margin: 0; font-weight: bold; background: #fff3e0; padding: 5px 25px; border-radius: 50px; display: inline-block;}
+        /* 標題區：縮減上下邊距，留空間給卡片 */
+        .header-area { text-align: center; margin-bottom: 2%; flex-shrink: 0;}
+        h1 { color: #e67e22; font-size: clamp(36px, 4vw, 55px); margin: 0 0 5px 0; text-shadow: 2px 2px 0px #ffeaa7; }
+        .subtitle { font-size: clamp(20px, 2vw, 28px); color: #8d6e63; margin: 0; font-weight: bold; background: #fff3e0; padding: 5px 25px; border-radius: 50px; display: inline-block;}
 
-        /* 課文卡片網格 */
+        /* 課文卡片網格：固定 4 欄 3 列，填滿剩餘空間 */
         .lesson-list { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 25px; width: 100%; padding: 10px; box-sizing: border-box;
+            grid-template-columns: repeat(4, 1fr); 
+            grid-template-rows: repeat(3, 1fr);
+            gap: 2%; width: 100%; height: 100%; box-sizing: border-box;
+            flex-grow: 1;
         }
 
+        /* 觸控大電視專屬卡片設計 */
         .lesson-card {
             background-color: #ffffff; border-radius: 25px; text-decoration: none; 
             display: flex; align-items: center; justify-content: center; text-align: center;
-            padding: 30px 15px; border: 5px solid #ffb6c1; transition: 0.3s; min-height: 120px;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.05); cursor: pointer;
+            padding: 5%; border: 6px solid #ffb6c1; transition: 0.2s; 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.05); cursor: pointer; height: 100%; width: 100%; box-sizing: border-box;
         }
         
-        .lesson-card:hover { transform: translateY(-8px); box-shadow: 0 15px 25px rgba(255, 182, 193, 0.3); background-color: #fff0f5; }
+        .lesson-card:active { transform: scale(0.95); box-shadow: none; }
         
         /* 讓不同課文的框框有不同顏色 */
-        .lesson-card:nth-child(4n+1) { border-color: #ffb6c1; }
-        .lesson-card:nth-child(4n+2) { border-color: #90caf9; }
-        .lesson-card:nth-child(4n+3) { border-color: #a5d6a7; }
-        .lesson-card:nth-child(4n+4) { border-color: #ffcc80; }
+        .lesson-card:nth-child(4n+1) { border-color: #ffb6c1; background-color: #fff0f5;} /* 粉紅 */
+        .lesson-card:nth-child(4n+2) { border-color: #90caf9; background-color: #e3f2fd;} /* 粉藍 */
+        .lesson-card:nth-child(4n+3) { border-color: #a5d6a7; background-color: #e8f5e9;} /* 粉綠 */
+        .lesson-card:nth-child(4n+4) { border-color: #ffcc80; background-color: #fff3e0;} /* 粉橘 */
 
-        .lesson-title { font-size: clamp(24px, 2vw, 32px); font-weight: bold; color: #5d4037; line-height: 1.4; }
+        .lesson-title { font-size: clamp(22px, 2.5vw, 36px); font-weight: bold; color: #5d4037; line-height: 1.4; }
 
     </style>
 </head>
@@ -79,7 +87,7 @@
                     container.appendChild(card);
                 }
             } else {
-                container.innerHTML = '<h2 style="color:red; text-align:center;">找不到 data.js，請確認檔案有上傳！</h2>';
+                container.innerHTML = '<h2 style="color:red; text-align:center; grid-column: 1/-1;">找不到 data.js，請確認檔案有上傳！</h2>';
             }
         };
     </script>
