@@ -278,10 +278,151 @@ const allLessonsData = {
     },
 
     "6": { title: "第六課：鄰居的小孩", level1: [], level2: [], level3: [], level4: [] },
+    
     "7": { title: "第七課：畫畫", level1: [], level2: [], level3: [], level4: [] },
-    "8": { title: "第八課：給松鼠的卡片", level1: [], level2: [], level3: [], level4: [] },
-    "9": { title: "第九課：張奶奶的寶貝", level1: [], level2: [], level3: [], level4: [] },
-    "10": { title: "第十課：井裡的青蛙", level1: [], level2: [], level3: [], level4: [] },
+    
+    // ================= 第八課 =================
+    "8": { 
+        title: "第八課：給松鼠的卡片", 
+        level1: [
+            { word: "卡", parts: ["images/L8/筆順-卡-部件-1.png", "images/L8/筆順-卡-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "卡片", vocabImg: "images/L8/vocab-卡片.png" },
+            { word: "片", parts: ["images/L8/筆順-片-部件-1.png", "images/L8/筆順-片-部件-2.png", "images/L8/筆順-片-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "卡片", vocabImg: "images/L8/vocab-卡片.png" },
+            { word: "秋", parts: ["images/L8/筆順-秋-部件-1.png", "images/L8/筆順-秋-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "秋天", vocabImg: "images/L8/vocab-秋天.png" },
+            { word: "採", parts: ["images/L8/筆順-採-部件-1.png", "images/L8/筆順-採-部件-2.png", "images/L8/筆順-採-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "採集", vocabImg: "images/L8/vocab-採集.png" },
+            { word: "果", parts: ["images/L8/筆順-果-部件-1.png", "images/L8/筆順-果-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "水果", vocabImg: "images/L8/vocab-水果.png" },
+            { word: "吃", parts: ["images/L8/筆順-吃-部件-1.png", "images/L8/筆順-吃-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "吃飯", vocabImg: "images/L8/vocab-吃飯.png" },
+            { word: "飽", parts: ["images/L8/筆順-飽-部件-1.png", "images/L8/筆順-飽-部件-2.png", "images/L8/筆順-飽-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "吃飽", vocabImg: "images/L8/vocab-吃飽.png" },
+            { word: "方", parts: ["images/L8/筆順-方-部件-1.png", "images/L8/筆順-方-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "地方", vocabImg: "images/L8/vocab-地方.png" },
+            { word: "埋", parts: ["images/L8/筆順-埋-部件-1.png", "images/L8/筆順-埋-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "埋藏", vocabImg: "images/L8/vocab-埋藏.png" },
+            { word: "進", parts: ["images/L8/筆順-進-部件-1.png", "images/L8/筆順-進-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "進去", vocabImg: "images/L8/vocab-進去.png" },
+            { word: "很", parts: ["images/L8/筆順-很-部件-1.png", "images/L8/筆順-很-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "很好", vocabImg: "images/L8/vocab-很好.png" },
+            { word: "久", parts: ["images/L8/筆順-久-部件-1.png", "images/L8/筆順-久-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "很久", vocabImg: "images/L8/vocab-很久.png" },
+            { word: "嗎", parts: ["images/L8/筆順-嗎-部件-1.png", "images/L8/筆順-嗎-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "好嗎", vocabImg: "images/L8/vocab-好嗎.png" },
+            { word: "長", parts: ["images/L8/筆順-長-部件-1.png", "images/L8/筆順-長-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "長大", vocabImg: "images/L8/vocab-長大.png" },
+            { word: "敬", parts: ["images/L8/筆順-敬-部件-1.png", "images/L8/筆順-敬-部件-2.png", "images/L8/筆順-敬-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "敬愛", vocabImg: "images/L8/vocab-敬愛.png" },
+            { word: "松", parts: ["images/L8/筆順-松-部件-1.png", "images/L8/筆順-松-部件-2.png", "images/L8/筆順-松-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "松鼠", vocabImg: "images/L8/vocab-松鼠.png" },
+            { word: "鼠", parts: ["images/L8/筆順-鼠-部件-1.png", "images/L8/筆順-鼠-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "松鼠", vocabImg: "images/L8/vocab-松鼠.png" },
+            { word: "從", parts: ["images/L8/筆順-從-部件-1.png", "images/L8/筆順-從-部件-2.png", "images/L8/筆順-從-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "從前", vocabImg: "images/L8/vocab-從前.png" },
+            { word: "等", parts: ["images/L8/筆順-等-部件-1.png", "images/L8/筆順-等-部件-2.png", "images/L8/筆順-等-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "等待", vocabImg: "images/L8/vocab-等待.png" }
+        ], 
+        level2: [], 
+        level3: [], 
+        level4: [
+            { word: "卡", radical: "卜", options: ["卜", "一"] },
+            { word: "片", radical: "片", options: ["片", "木"] },
+            { word: "秋", radical: "禾", options: ["禾", "火"] },
+            { word: "採", radical: "手", options: ["手", "木"] },
+            { word: "果", radical: "木", options: ["木", "田"] },
+            { word: "吃", radical: "口", options: ["口", "乞"] },
+            { word: "飽", radical: "食", options: ["食", "包"] },
+            { word: "方", radical: "方", options: ["方", "万"] },
+            { word: "埋", radical: "土", options: ["土", "里"] },
+            { word: "進", radical: "辵(辶)", options: ["辵(辶)", "隹"] },
+            { word: "很", radical: "彳", options: ["彳", "艮"] },
+            { word: "久", radical: "丿", options: ["丿", "人"] },
+            { word: "嗎", radical: "口", options: ["口", "馬"] },
+            { word: "長", radical: "長", options: ["長", "辰"] },
+            { word: "敬", radical: "攴(攵)", options: ["攴(攵)", "苟"] },
+            { word: "松", radical: "木", options: ["木", "公"] },
+            { word: "鼠", radical: "鼠", options: ["鼠", "臼"] },
+            { word: "從", radical: "彳", options: ["彳", "人"] },
+            { word: "等", radical: "竹", options: ["竹", "寺"] }
+        ] 
+    },
+
+    // ================= 第九課 =================
+    "9": { 
+        title: "第九課：張奶奶的寶貝", 
+        level1: [
+            { word: "奶", parts: ["images/L9/筆順-奶-部件-1.png", "images/L9/筆順-奶-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "奶奶", vocabImg: "images/L9/vocab-奶奶.png" },
+            { word: "貝", parts: ["images/L9/筆順-貝-部件-1.png", "images/L9/筆順-貝-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "寶貝", vocabImg: "images/L9/vocab-寶貝.png" },
+            { word: "早", parts: ["images/L9/筆順-早-部件-1.png", "images/L9/筆順-早-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "早上", vocabImg: "images/L9/vocab-早上.png" },
+            { word: "校", parts: ["images/L9/筆順-校-部件-1.png", "images/L9/筆順-校-部件-2.png", "images/L9/筆順-校-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "學校", vocabImg: "images/L9/vocab-學校.png" },
+            { word: "園", parts: ["images/L9/筆順-園-部件-1.png", "images/L9/筆順-園-部件-2.png", "images/L9/筆順-園-部件-3.png", "images/L9/筆順-園-部件-4.png"], pos: [{x: 90, y: 130}, {x: 150, y: 130}, {x: 90, y: 180}, {x: 150, y: 180}], vocab: "校園", vocabImg: "images/L9/vocab-校園.png" },
+            { word: "工", parts: ["images/L9/筆順-工-部件-1.png", "images/L9/筆順-工-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "工作", vocabImg: "images/L9/vocab-工作.png" },
+            { word: "作", parts: ["images/L9/筆順-作-部件-1.png", "images/L9/筆順-作-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "作業", vocabImg: "images/L9/vocab-作業.png" },
+            { word: "她", parts: ["images/L9/筆順-她-部件-1.png", "images/L9/筆順-她-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "她們", vocabImg: "images/L9/vocab-她們.png" },
+            { word: "邊", parts: ["images/L9/筆順-邊-部件-1.png", "images/L9/筆順-邊-部件-2.png", "images/L9/筆順-邊-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "旁邊", vocabImg: "images/L9/vocab-旁邊.png" },
+            { word: "汗", parts: ["images/L9/筆順-汗-部件-1.png", "images/L9/筆順-汗-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "流汗", vocabImg: "images/L9/vocab-流汗.png" },
+            { word: "學", parts: ["images/L9/筆順-學-部件-1.png", "images/L9/筆順-學-部件-2.png", "images/L9/筆順-學-部件-3.png", "images/L9/筆順-學-部件-4.png"], pos: [{x: 90, y: 130}, {x: 150, y: 130}, {x: 90, y: 180}, {x: 150, y: 180}], vocab: "學習", vocabImg: "images/L9/vocab-學習.png" },
+            { word: "您", parts: ["images/L9/筆順-您-部件-1.png", "images/L9/筆順-您-部件-2.png", "images/L9/筆順-您-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "您好", vocabImg: "images/L9/vocab-您好.png" },
+            { word: "樣", parts: ["images/L9/筆順-樣-部件-1.png", "images/L9/筆順-樣-部件-2.png", "images/L9/筆順-樣-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "樣子", vocabImg: "images/L9/vocab-樣子.png" },
+            { word: "當", parts: ["images/L9/筆順-當-部件-1.png", "images/L9/筆順-當-部件-2.png", "images/L9/筆順-當-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "當然", vocabImg: "images/L9/vocab-當然.png" },
+            { word: "成", parts: ["images/L9/筆順-成-部件-1.png", "images/L9/筆順-成-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "成功", vocabImg: "images/L9/vocab-成功.png" },
+            { word: "寶", parts: ["images/L9/筆順-寶-部件-1.png", "images/L9/筆順-寶-部件-2.png", "images/L9/筆順-寶-部件-3.png", "images/L9/筆順-寶-部件-4.png"], pos: [{x: 90, y: 130}, {x: 150, y: 130}, {x: 90, y: 180}, {x: 150, y: 180}], vocab: "寶石", vocabImg: "images/L9/vocab-寶石.png" },
+            { word: "擦", parts: ["images/L9/筆順-擦-部件-1.png", "images/L9/筆順-擦-部件-2.png", "images/L9/筆順-擦-部件-3.png", "images/L9/筆順-擦-部件-4.png"], pos: [{x: 90, y: 130}, {x: 150, y: 130}, {x: 90, y: 180}, {x: 150, y: 180}], vocab: "擦拭", vocabImg: "images/L9/vocab-擦拭.png" },
+            { word: "澆", parts: ["images/L9/筆順-澆-部件-1.png", "images/L9/筆順-澆-部件-2.png", "images/L9/筆順-澆-部件-3.png", "images/L9/筆順-澆-部件-4.png"], pos: [{x: 90, y: 130}, {x: 150, y: 130}, {x: 90, y: 180}, {x: 150, y: 180}], vocab: "澆水", vocabImg: "images/L9/vocab-澆水.png" }
+        ], 
+        level2: [], 
+        level3: [], 
+        level4: [
+            { word: "奶", radical: "女", options: ["女", "乃"] },
+            { word: "貝", radical: "貝", options: ["貝", "目"] },
+            { word: "早", radical: "日", options: ["日", "十"] },
+            { word: "校", radical: "木", options: ["木", "交"] },
+            { word: "園", radical: "囗", options: ["囗", "袁"] },
+            { word: "工", radical: "工", options: ["工", "土"] },
+            { word: "作", radical: "人", options: ["人", "乍"] },
+            { word: "她", radical: "女", options: ["女", "也"] },
+            { word: "邊", radical: "辵(辶)", options: ["辵(辶)", "力"] },
+            { word: "汗", radical: "水", options: ["水", "干"] },
+            { word: "學", radical: "子", options: ["子", "臼"] },
+            { word: "您", radical: "心", options: ["心", "你"] },
+            { word: "樣", radical: "木", options: ["木", "羊"] },
+            { word: "當", radical: "田", options: ["田", "尚"] },
+            { word: "成", radical: "戈", options: ["戈", "戊"] },
+            { word: "寶", radical: "宀", options: ["宀", "玉"] },
+            { word: "擦", radical: "手", options: ["手", "察"] },
+            { word: "澆", radical: "水", options: ["水", "堯"] }
+        ] 
+    },
+
+    // ================= 第十課 =================
+    "10": { 
+        title: "第十課：井裡的青蛙", 
+        level1: [
+            { word: "井", parts: ["images/L10/筆順-井-部件-1.png", "images/L10/筆順-井-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "水井", vocabImg: "images/L10/vocab-水井.png" },
+            { word: "隻", parts: ["images/L10/筆順-隻-部件-1.png", "images/L10/筆順-隻-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "一隻", vocabImg: "images/L10/vocab-一隻.png" },
+            { word: "除", parts: ["images/L10/筆順-除-部件-1.png", "images/L10/筆順-除-部件-2.png", "images/L10/筆順-除-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "除了", vocabImg: "images/L10/vocab-除了.png" },
+            { word: "睡", parts: ["images/L10/筆順-睡-部件-1.png", "images/L10/筆順-睡-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "睡覺", vocabImg: "images/L10/vocab-睡覺.png" },
+            { word: "覺", parts: ["images/L10/筆順-覺-部件-1.png", "images/L10/筆順-覺-部件-2.png", "images/L10/筆順-覺-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "覺得", vocabImg: "images/L10/vocab-覺得.png" },
+            { word: "東", parts: ["images/L10/筆順-東-部件-1.png", "images/L10/筆順-東-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "東西", vocabImg: "images/L10/vocab-東西.png" },
+            { word: "西", parts: ["images/L10/筆順-西-部件-1.png", "images/L10/筆順-西-部件-2.png"], pos: [{x: 100, y: 110}, {x: 100, y: 180}], vocab: "西瓜", vocabImg: "images/L10/vocab-西瓜.png" },
+            { word: "拍", parts: ["images/L10/筆順-拍-部件-1.png", "images/L10/筆順-拍-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "拍手", vocabImg: "images/L10/vocab-拍手.png" },
+            { word: "肚", parts: ["images/L10/筆順-肚-部件-1.png", "images/L10/筆順-肚-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "肚子", vocabImg: "images/L10/vocab-肚子.png" },
+            { word: "唉", parts: ["images/L10/筆順-唉-部件-1.png", "images/L10/筆順-唉-部件-2.png", "images/L10/筆順-唉-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "嘆氣", vocabImg: "images/L10/vocab-嘆氣.png" },
+            { word: "幾", parts: ["images/L10/筆順-幾-部件-1.png", "images/L10/筆順-幾-部件-2.png", "images/L10/筆順-幾-部件-3.png", "images/L10/筆順-幾-部件-4.png"], pos: [{x: 90, y: 130}, {x: 150, y: 130}, {x: 90, y: 180}, {x: 150, y: 180}], vocab: "幾個", vocabImg: "images/L10/vocab-幾個.png" },
+            { word: "世", parts: ["images/L10/筆順-世-部件-1.png", "images/L10/筆順-世-部件-2.png", "images/L10/筆順-世-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "世界", vocabImg: "images/L10/vocab-世界.png" },
+            { word: "界", parts: ["images/L10/筆順-界-部件-1.png", "images/L10/筆順-界-部件-2.png", "images/L10/筆順-界-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "邊界", vocabImg: "images/L10/vocab-邊界.png" },
+            { word: "連", parts: ["images/L10/筆順-連-部件-1.png", "images/L10/筆順-連-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "連忙", vocabImg: "images/L10/vocab-連忙.png" },
+            { word: "裝", parts: ["images/L10/筆順-裝-部件-1.png", "images/L10/筆順-裝-部件-2.png", "images/L10/筆順-裝-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "假裝", vocabImg: "images/L10/vocab-假裝.png" },
+            { word: "蛙", parts: ["images/L10/筆順-蛙-部件-1.png", "images/L10/筆順-蛙-部件-2.png"], pos: [{x: 80, y: 180}, {x: 150, y: 180}], vocab: "青蛙", vocabImg: "images/L10/vocab-青蛙.png" },
+            { word: "窪", parts: ["images/L10/筆順-窪-部件-1.png", "images/L10/筆順-窪-部件-2.png", "images/L10/筆順-窪-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "水窪", vocabImg: "images/L10/vocab-水窪.png" }
+        ], 
+        level2: [], 
+        level3: [], 
+        level4: [
+            { word: "井", radical: "二", options: ["二", "十"] },
+            { word: "隻", radical: "隹", options: ["隹", "又"] },
+            { word: "除", radical: "阜(阝)", options: ["阜(阝)", "余"] },
+            { word: "睡", radical: "目", options: ["目", "垂"] },
+            { word: "覺", radical: "見", options: ["見", "學"] },
+            { word: "東", radical: "木", options: ["木", "日"] },
+            { word: "西", radical: "襾", options: ["襾", "四"] },
+            { word: "拍", radical: "手", options: ["手", "白"] },
+            { word: "肚", radical: "肉(月)", options: ["肉(月)", "土"] },
+            { word: "唉", radical: "口", options: ["口", "矣"] },
+            { word: "幾", radical: "幺", options: ["幺", "戈"] },
+            { word: "世", radical: "一", options: ["一", "廿"] },
+            { word: "界", radical: "田", options: ["田", "介"] },
+            { word: "連", radical: "辵(辶)", options: ["辵(辶)", "車"] },
+            { word: "裝", radical: "衣", options: ["衣", "壯"] },
+            { word: "蛙", radical: "虫", options: ["虫", "圭"] },
+            { word: "窪", radical: "水", options: ["水", "穴"] }
+        ] 
+    },
+
     "11": { title: "第十一課：吃星星的鴨子", level1: [], level2: [], level3: [], level4: [] },
+    
     "12": { title: "第十二課：快樂不只一半", level1: [], level2: [], level3: [], level4: [] }
 };
