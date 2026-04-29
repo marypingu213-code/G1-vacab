@@ -305,8 +305,20 @@ const allLessonsData = {
             { word: "從", parts: ["images/L8/筆順-從-部件-1.png", "images/L8/筆順-從-部件-2.png", "images/L8/筆順-從-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "從前", vocabImg: "images/L8/vocab-從前.png" },
             { word: "等", parts: ["images/L8/筆順-等-部件-1.png", "images/L8/筆順-等-部件-2.png", "images/L8/筆順-等-部件-3.png"], pos: [{x: 70, y: 180}, {x: 130, y: 180}, {x: 190, y: 180}], vocab: "等待", vocabImg: "images/L8/vocab-等待.png" }
         ], 
-        level2: [], 
-        level3: [], 
+        level2: [
+            { text: "你的上片畫的好漂亮，媽媽一定會很喜歡！", typo: "上", correct: "卡", options: ["卡", "上", "下"], speakText: "你的卡片畫的好漂亮，媽媽一定會很喜歡！" },
+            { text: "他已經近去教室五分鐘了，怎麼還沒拿課本出來?", typo: "近", correct: "進", options: ["進", "近", "退"], speakText: "他已經進去教室五分鐘了，怎麼還沒拿課本出來？" },
+            { text: "今天的作業很多，所以妹妹寫了很九。", typo: "九", correct: "久", options: ["久", "九", "丸"], speakText: "今天的作業很多，所以妹妹寫了很久。" },
+            { text: "蜜蜂跟蝴蝶都會彩花蜜。", typo: "彩", correct: "採", options: ["採", "彩", "踩"], speakText: "蜜蜂跟蝴蝶都會採花蜜。" },
+            { text: "大家都很尊靜這位年級很大的老師。", typo: "靜", correct: "敬", options: ["敬", "靜", "淨"], speakText: "大家都很尊敬這位年級很大的老師。" }
+        ], 
+        level3: [
+            { parts: ["我", "喜歡", "跟", "大家", "一起", "去", "操場", "玩球。"] },
+            { parts: ["希望", "你", "每天", "健康", "快樂。"] },
+            { parts: ["他", "已經", "都", "整理", "好了", "你不用", "畫蛇添足", "幫倒忙。"] },
+            { parts: ["亮恩", "這幾天都", "愁眉苦臉", "好像", "有心事。"] },
+            { parts: ["小狗", "把", "沒吃完的", "骨頭", "埋在", "樹下。"] }
+        ], 
         level4: [
             { word: "卡", radical: "卜", options: ["卜", "一"] },
             { word: "片", radical: "片", options: ["片", "木"] },
